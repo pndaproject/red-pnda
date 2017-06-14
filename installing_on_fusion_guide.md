@@ -43,7 +43,9 @@ By default, the virtual machine network adapter is configured for 'host-only' op
 
 <img src="fusion_images/host_only_fusion.png" alt="Step 1" style="width: 600px;"/>
 
-If you need Internet access, consider changing the network adapter's configuration from 'Private to my Mac' to '**Share with my Mac**' (although, this is Mac-specific, similar steps apply for Vmware Workstation for Windows/Linux) and reboot.
+If you need Internet access, consider changing the network adapter's configuration from 'Private to my Mac' to '**Share with my Mac**' (although, this is Mac-specific, similar steps apply for Vmware Workstation for Windows/Linux).
+
+Be sure to reboot your VM if you change the network settings and run the `assign-ip.sh` script as shown in Step 9 above.
 
 
 

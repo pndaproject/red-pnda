@@ -70,4 +70,4 @@ If you need internet access, you have two options:
 
 If you do add a second network adapter, be careful not be specify the interface listing `eth0` IP for the Step 9 listed above.
 
-Be sure to reboot your VM if you change the network settings.
+Be sure to reboot your VM if you change the network settings and run the `assign-ip.sh` script as shown in Step 10 above.
