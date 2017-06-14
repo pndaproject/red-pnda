@@ -1,24 +1,24 @@
 # Installing on VirtualBox Guide
 
-If you don't have virtualbox, please download it [here](https://www.virtualbox.org/wiki/Downloads)
+If you don't have VirtualBox installed, please download it [here](https://www.virtualbox.org/wiki/Downloads) and follow the appropriate installation instructions for your host computer's operating system.
 
 ## Detailed How To
 
-**Step 1:** Open VirtualBox, go to File -> Import Appliance.
+**Step 1:** Open VirtualBox and select File -> Import Appliance from the menu.
 
 <img src="virtualbox_images/VBox_Step_1.png" alt="Step 1" style="width: 600px;"/>
 
-**Step 2:** Choose the Red PNDA OVA file to import from..
+**Step 2:** Select the Red PNDA OVA file from its current location.
 
 <img src="virtualbox_images/VBox_Step_2.png" alt="Step 1" style="width: 600px;"/>
 
 Click "Continue"
 
-**Step 3:** Leave the default setting as it is, click "Import"..
+**Step 3:** Click "Import". It is not recommended to adjust the default OVA settings.
 
 <img src="virtualbox_images/VBox_Step_3.png" alt="Step 1" style="width: 600px;"/>
 
-**Step 4:** You should now see the VMDK installed and ready to go..
+**Step 4:** You should now see the VMDK installed and ready to go.
 
 <img src="virtualbox_images/VBox_Step_4.png" alt="Step 1" style="width: 600px;"/>
 
@@ -28,7 +28,7 @@ Click "Continue"
 
 Click Continue
 
-**Step 6:** Click on Linked Clone and click Clone
+**Step 6:** Click on Linked Clone and click Clone.
 
 <img src="virtualbox_images/VBox_Step_6.png" alt="Step 1" style="width: 600px;"/>
 
@@ -36,7 +36,7 @@ Click Continue
 
 **Step 8:** Use the default credentials (pnda/pnda) to login.
 
-**Step 7:** Run `ifconfig` command to check which network interface is reachable from host machine, in my case its `eth0`
+**Step 7:** Run `ifconfig` command to check which network interface is reachable from host machine, in my case its `eth0`.
 
 <img src="virtualbox_images/VBox_Step_8.png" alt="Step 1" style="width: 600px;"/>
 
