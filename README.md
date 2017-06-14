@@ -67,6 +67,29 @@ For example, if you streamed avro-encoded data on 20th June 2017 at 5PM, your da
     /data/year=2017/month=6/day=20/hour=17/dump.avro
      
  directory structure.
- 
+
+### Sample Kafka Producer
+
+We have also provided a sample Kafka producer in python. This will send one avro encoded event to the `avro.log.logtest` topic per execution, so feel free to play around with it.
+
+    cd /opt/pnda
+    python producer.py
+    
+Depending on what time you send the data, it will be stored in
+
+    /data/year=x/month=x/day=x/hour=x/dump.avro
+    
+If the data has been encoded correctly, then the Avro tools will be able to decode it without any errors. In this case, dump.avro contains some netflow data and our schema is in a file named dataplatform-raw.avsc
+
+    root@red-pnda:/opt/pnda# java -jar avro-tools-1.7.7.jar fragtojson --schema-file dataplatform-raw.avsc /data/year=2017/month=6/day=14/hour=20/dump.avro
+    {
+      "timestamp" : 1497464526286,
+      "src" : "ESC",
+      "host_ip" : "my_ipv6",
+      "rawdata" : "python-random-9343-loop-0"
+    }
+
+### Logstash
+
 If you want to use Logstash to ingest avro-encoded data, refer to the [Logstash guide](Logstash_guide.md).
 
