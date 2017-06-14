@@ -2,9 +2,9 @@
 
 <img src="logo/pnda1r-trans.png" alt="Red PNDA logo" style="width: 30px;"/>
 
-This framework provisions a minimal set of the PNDA ([pnda.io](http://pnda.io)) components to enable developers writing apps targeted at the full PNDA stack. Data exploration and app prototyping are supported via Jupyter and Apache Spark respectively. 
+This framework provisions a minimal set of the PNDA ([pnda.io](http://pnda.io)) components to enable developers writing apps targeted at the full PNDA stack, to experiment with the PNDA components in a smaller, lightweight environment. Data exploration and app prototyping is supported using Jupyter and Apache Spark. 
 
-Note this framework is not implemented with either scalability nor HA in mind and hence is unsuited for running production workloads. If this is a requirement, then one of the core PNDA flavors will be required - see PNDA [Guide](http://pnda.io/guide).
+Note - this framework is not implemented with either scalability nor HA in mind and hence is unsuited for running production workloads. If this is a requirement, then one of the core PNDA flavors will be required - see PNDA [Guide](http://pnda.io/guide).
 
 The Red PNDA framework is intended as a platform for experimentation and is NOT formally supported at this point in time. Any issues encountered with the system can be reported to the standard PNDA support forums for informational purposes only.
 
@@ -25,13 +25,13 @@ If you are installing the OVA file on VMware Fusion, please refer to [Installing
 
 ## VM SSH access
 
-If you are using Mac or Linux OS, you should be able to ssh into the VM from your host machine by using the host-only/bridged adapter IP address.
+If you are using Mac or Linux OS, you should be able to connect to the Red-PNDA VM using ssh from your host machine to the host-only/bridged adapter IP address of the VM. 
 
-If you are using Windows, consider using [PuTTY](http://www.putty.org) to ssh by using the host-only/bridged adapter IP address.
+If you are using Windows, consider using [PuTTY](http://www.putty.org) to connect via ssh to the host-only/bridged adapter IP address of the Red-PNDA VM.
 
 ## Red-PNDA components
 
-We use the following open source components:
+Red-PNDA makes use the following open source components:
 
 * Console Frontend - [https://github.com/pndaproject/platform-console-frontend](https://github.com/pndaproject/platform-console-frontend)
 * Console Backend - [https://github.com/pndaproject/platform-console-backend](https://github.com/pndaproject/platform-console-backend)
@@ -49,24 +49,24 @@ We use the following open source components:
 
 ## Data Ingestion
 
-By default, there are two kafka topics created before hand for easy usage.
+By default, there are two kafka topics created for easy usage.
 
 1. raw.log.localtest
 2. avro.log.localtest
 
-The `raw.log.localtest` topic is a generic topic, you could use it to ingest any type of data.
+The `raw.log.localtest` topic is a generic topic; you could use this topic to ingest any type of data.
 
 The `avro.log.localtest` topic can be used to ingest PNDA avro encoded data.
 
-If you use the `avro.log.localtest` topic, we flush the data to disk on the VM.
+Note that if you use the `avro.log.localtest` topic, data is flushed to the disk of the VM.
 
-By default, we store data on the `/data` directory.
+By default data is stored in the `/data` directory of the VM's filesystem.
 
-For example, if you streamed some avro encoded data on 20th June 2017 at 5PM, your data will be stored in
+For example, if you streamed avro-encoded data on 20th June 2017 at 5PM, your data will be stored in
 
     /data/year=2017/month=6/day=20/hour=17/dump.avro
      
  directory structure.
  
-If you want to use logstash to ingest avro encoded data, refer to our [Logstash guide](Logstash_guide.md).
+If you want to use Logstash to ingest avro-encoded data, refer to the [Logstash guide](Logstash_guide.md).
 
