@@ -99,6 +99,13 @@ The [Jupyter Notebook](http://jupyter.org) is a web application that allows you 
 
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
+## Shutdown
+
+Suspending the VM is not supported, please reboot or do a clean shutdown of the VM as an alternative.
+
+To shutdown the VM in VBox, right-click on the VM and click on `Close -> Power Off` to do a graceful shutdown.
+
+In Fusion, Click on `Virtual Machine` tab on the main menu and click on `Shutdown`
 
 ## General Troubleshooting
 
@@ -135,7 +142,10 @@ However, hbase logs are at `/usr/local/hbase-1.2.0/logs/` directory.
 #### Q. OpenTSDB doesn't start after restarting it several times
 
 It might mean Hbase failed to start master or might have some issue.
-Here are the steps to rectify it:
+
+First, check the logs at `/var/log/opentsdb/opentsdb.log` and `/usr/local.hbase-1.2.0/logs` 
+
+Here are the few suggestions to rectify it:
 
 * Try logging in to the `hbase shell`
 * Do a simple scan of any one of the `tsdb` tables by doing a `scan 'tsdb'` inside the hbase shell
@@ -161,3 +171,9 @@ If there was an issue, logout of the hbase shell and execute the following comma
 
     # start opentsdb 
     sudo service opentsdb start
+    
+#### Can I upgrade the Ubuntu OS?
+
+We are currently running Ubuntu 14.04 but its not advisable to upgrade the OS to the newer version as several init scripts won't run as expected i.e. please refrain from doing a `sudo apt-get upgrade`
+
+But `sudo apt-get update` should be fine and shouldn't cause any issues.
