@@ -97,36 +97,67 @@ If you want to use Logstash to ingest avro-encoded data, refer to the [Logstash 
 
 The [Jupyter Notebook](http://jupyter.org) is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. In Red PNDA, it supports exploration and presentation of data from local FS and HBase.
 
-### Connecting
+Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
-Jupyter is deployed with two kernel supports: Python2 kernel and PySpark (Python2) kernel. An example Jupyter notebook is also provided with details instructions on how to rapid prototype using Jupyter PySpark kernel. 
 
-By default, Jupyter is installed on port `9000`. In order to access Jupyter portal go to:
+## General Troubleshooting
 
-    http://<Accessible-IP>:9000
+#### Q. What port is Kafka Manager, OpenTSDB, Grafana, Spark Web UI on?
+
+* Kafka Manager is on the port `10900` 
+* OpenTSDB is on port `4242`
+* Grafana Server is on port `3000`
+* Spark Web UI is on port `8080`
+
+#### Q. What's the login credentials for the Grafana Server?
+
+Use `pnda/pndapnda` as the login credentials.
+
+#### Q. Why isn't Packages, Apps and Datasets tabs active on the Console Tab?
+
+Red PNDA currently doesn't include the services which provide those functionalities.
+
+#### Q. Kafka turns grey/red on the console after start up. What should I do?
+
+ Please execute `sudo service zookeeper restart` on the VM terminal. You should see Kafka turning back to green after a minute.
+
+#### Q. How can I run my spark application on Red PNDA?
+
+If you have built a jar containing all the necessary libs, you can simply scp the jar to the VM and run it with the `spark-submit` command.
+
+#### Q. Where are all the service logs available?
+
+All component logs are generally available at `/var/log/` for debugging purposes. 
+
+However, hbase logs are at `/usr/local/hbase-1.2.0/logs/` directory.
+
+
+#### Q. OpenTSDB doesn't start after restarting it several times
+
+It might mean Hbase failed to start master or might have some issue.
+Here are the steps to rectify it:
+
+* Try logging in to the `hbase shell`
+* Do a simple scan of any one of the `tsdb` tables by doing a `scan 'tsdb'` inside the hbase shell
+
+If there wasn't any issue, simply disable and drop the tsdb tables are create them again and finally restart the opentsdb component.
+
+If there was an issue, logout of the hbase shell and execute the following commands.
+
+    # stop hbase
+    /usr/local/hbase-1.2.0/bin/stop-all.sh
     
-When prompted for a password, enter `pnda`
+    # remove /hbase directory
+    sudo rm /root/hbase
+    
+    # start hbase
+    /usr/local/hbase-1.2.0/bin/start-all.sh
 
-### QuickStart
+    # create the necessary hbase tables
+    echo "create 'tsdb', 'cf'" | hbase shell
+    echo "create 'tsdb-uid', 'cf'" | hbase shell
+    echo "create 'tsdb-tree', 'cf'" | hbase shell
+    echo "create 'tsdb-meta', 'cf'" | hbase shell
 
-You should see a jupyter login page as seen below
-
-<img src="jupyter_images/login_page.png" alt="login" style="width: 600px;"/>
-
-Enter `pnda` to login to the server, you should see the default notebook list view
-
-<img src="jupyter_images/Step_1.png" alt="login" style="width: 600px;"/>
-
-#### Open Example Notebook
-
-Click on the link `PNDA minimal notebook.ipynb` 
-
-<img src="jupyter_images/Step_2.png" alt="login" style="width: 600px;"/>
-
-### Create a notebook
-
-To create a Spark notebook, click on New -> PySpark kernel.
-
-<img src="jupyter_images/Step_3.png" alt="login" style="width: 600px;"/>
-
-Edit your file, save it going to File -> Save and Checkpoint.
+    # start opentsdb 
+    sudo service opentsdb start

@@ -5,15 +5,15 @@ You must already have Vmware Fusion installed on your Mac.
 
 **Step 1:** Open Vmware Fusion, go to File -> Import menu and select the Red PNDA .ova file. Click "Continue".
 
-<img src="fusion_images/Fusion_Step_1.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/Fusion_Step_1.png" alt="Step 1" style="width: 600px;"/>
 
 **Step 2:** Click "Save" on the default location prompted and wait until the import is finished and then click "Finish".
 
-<img src="fusion_images/Fusion_Step_2.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/Fusion_Step_2.png" alt="Step 2" style="width: 600px;"/>
 
 **Step 3:** Right click on the Red PNDA VM and click on "Linked Clone" & click "Save" on the default location prompted.
 
-<img src="fusion_images/Fusion_Step_3.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/Fusion_Step_3.png" alt="Step 3" style="width: 600px;"/>
 
 **Step 4:** Start the Cloned Red PNDA VM
 
@@ -21,7 +21,7 @@ You must already have Vmware Fusion installed on your Mac.
 
 **Step 7:** Run the `ifconfig` command to check which network interface is reachable from host machine. In this example it is `eth0`.
 
-<img src="fusion_images/Fusion_Step_4.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/Fusion_Step_4.png" alt="Step 4" style="width: 600px;"/>
 
 **Step 9:** Run the following command:
 
@@ -29,11 +29,11 @@ You must already have Vmware Fusion installed on your Mac.
 
 If prompted for s password, enter `pnda`
 
-<img src="fusion_images/Fusion_Step_5.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/Fusion_Step_5.png" alt="Step 1" style="width: 600px;"/>
 
 Open a browser and navigate to reachable address. In this example, the address is `192.168.192.129`:
 
-<img src="fusion_images/chrome_1.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/chrome_1.png" alt="Step 9" style="width: 600px;"/>
 
 Congratulations! You successfully installed Red PNDA.
 
@@ -41,7 +41,7 @@ Congratulations! You successfully installed Red PNDA.
 
 By default, the virtual machine network adapter is configured for 'host-only' operation. By using this type of adapter, you’ll be able to access a private, virtual network consisting solely of your host and any guest virtual machines. Any of the virtual machines can access each other, but you can't access outside traffic i.e. reach the Internet.
 
-<img src="fusion_images/host_only_fusion.png" alt="Step 1" style="width: 600px;"/>
+<img src="images/fusion_images/host_only_fusion.png" alt="Host-Only" style="width: 600px;"/>
 
 If you need Internet access, consider changing the network adapter's configuration from 'Private to my Mac' to '**Share with my Mac**' (although, this is Mac-specific, similar steps apply for Vmware Workstation for Windows/Linux).
 
