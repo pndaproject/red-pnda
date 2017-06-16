@@ -4,13 +4,30 @@ If you don't have VirtualBox installed, please download it [here](https://www.vi
 
 ## Detailed How To
 
+**Step 0:** Before we begin, it's important to have a host-only network set up on Virtualbox.
+If you don't have one, go to Preferences -> Network -> Host-Only Networks
+
+<img src="images/virtualbox_images/host_only_1.png" alt="Step 1" style="width: 300px;"/>
+
+If the list is empty, please click on the Add button the right to create a Host-Only network.
+
+You should see something like this:
+
+<img src="images/virtualbox_images/host_only_2.png" alt="Step 1" style="width: 300px;"/>
+
+Click on DHCP Server tab and click on Enable Server.
+
+<img src="images/virtualbox_images/host_only_3.png" alt="Step 1" style="width: 300px;"/>
+
+Click Ok and exit.
+
 **Step 1:** Open VirtualBox and select File -> Import Appliance from the menu.
 
 <img src="images/virtualbox_images/VBox_Step_1.png" alt="Step 1" style="width: 600px;"/>
 
 **Step 2:** Select the Red PNDA OVA file from its current location.
 
-<img src="virtualbox_images/VBox_Step_2.png" alt="Step 2" style="width: 600px;"/>
+<img src="images/virtualbox_images/VBox_Step_2.png" alt="Step 2" style="width: 600px;"/>
 
 Click "Continue"
 

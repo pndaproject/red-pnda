@@ -7,9 +7,21 @@ You must already have Vmware Fusion installed on your Mac.
 
 <img src="images/fusion_images/Fusion_Step_1.png" alt="Step 1" style="width: 600px;"/>
 
-**Step 2:** Click "Save" on the default location prompted and wait until the import is finished and then click "Finish".
+**Step 2:** Click "Save" on the default location prompted. Click on "Retry" if it complains about the import.
 
-<img src="images/fusion_images/Fusion_Step_2.png" alt="Step 2" style="width: 600px;"/>
+<img src="images/fusion_images/import_error.png" alt="Step 1" style="width: 300px;"/>
+
+Wait until the import is finished and then click "Finish".
+
+<img src="images/fusion_images/Fusion_Step_2.png" alt="Step 1" style="width: 600px;"/>
+
+Click "Upgrade" if prompted
+
+<img src="images/fusion_images/upgrade_vm_message.png" alt="Step 1" style="width: 300px;"/>
+
+Click "Yes" if prompted.
+
+<img src="images/fusion_images/error_1.png" alt="Step 1" style="width: 300px;"/>
 
 **Step 3:** Right click on the Red PNDA VM and click on "Linked Clone" & click "Save" on the default location prompted.
 
