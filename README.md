@@ -111,6 +111,12 @@ In Fusion, Click on `Virtual Machine` tab on the main menu and click on `Shutdow
 
 Please refer to our [Troubleshooting guide](General_Troubleshooting.md) for tips if you encounter any problems.
 
+## Roll your own Red PNDA
+
+If you are interested to roll your own Red PNDA either on your local machine or on the cloud without installing the .OVA file, then this one is for you.
+
+Refer to this [guide](roll_your_own_RED_PNDA.md) for further details.
+
 ## Further Reading
 
 For further deep dive into the various components, use this as a entry point.
