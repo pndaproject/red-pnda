@@ -109,7 +109,7 @@ In Fusion, Click on `Virtual Machine` tab on the main menu and click on `Shutdow
 
 ## General Troubleshooting
 
-Please refer to out [Troubleshooting guide](General_Troubleshooting.md) for tips if you encounter any problems.
+Please refer to our [Troubleshooting guide](General_Troubleshooting.md) for tips if you encounter any problems.
 
 ## Further Reading
 
