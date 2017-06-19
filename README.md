@@ -109,71 +109,18 @@ In Fusion, Click on `Virtual Machine` tab on the main menu and click on `Shutdow
 
 ## General Troubleshooting
 
-#### Q. What port is Kafka Manager, OpenTSDB, Grafana, Spark Web UI on?
+Please refer to out [Troubleshooting guide](General_Troubleshooting.md) for tips if you encounter any problems.
 
-* Kafka Manager is on the port `10900` 
-* OpenTSDB is on port `4242`
-* Grafana Server is on port `3000`
-* Spark Web UI is on port `8080`
+## Further Reading
 
-#### Q. What's the login credentials for the Grafana Server?
+For further deep dive into the various components, use this as a entry point.
 
-Use `pnda/pndapnda` as the login credentials.
+* Jupyter Notebooks, this guide which contains a nice intro to Jupyter as well: [https://github.com/jakevdp/PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook)
 
-#### Q. Why isn't Packages, Apps and Datasets tabs active on the Console Tab?
+* OpenTSDB: [http://opentsdb.net/docs/build/html/user_guide/quickstart.html](http://opentsdb.net/docs/build/html/user_guide/quickstart.html)
 
-Red PNDA currently doesn't include the services which provide those functionalities.
+* Grafana: [http://docs.grafana.org/guides/getting_started/](http://docs.grafana.org/guides/getting_started/)
 
-#### Q. Kafka turns grey/red on the console after start up. What should I do?
+* Kafka Manager: [https://github.com/yahoo/kafka-manager](https://github.com/yahoo/kafka-manager)
 
- Please execute `sudo service zookeeper restart` on the VM terminal. You should see Kafka turning back to green after a minute.
-
-#### Q. How can I run my spark application on Red PNDA?
-
-If you have built a jar containing all the necessary libs, you can simply scp the jar to the VM and run it with the `spark-submit` command.
-
-#### Q. Where are all the service logs available?
-
-All component logs are generally available at `/var/log/` for debugging purposes. 
-
-However, hbase logs are at `/usr/local/hbase-1.2.0/logs/` directory.
-
-
-#### Q. OpenTSDB doesn't start after restarting it several times
-
-It might mean Hbase failed to start master or might have some issue.
-
-First, check the logs at `/var/log/opentsdb/opentsdb.log` and `/usr/local.hbase-1.2.0/logs` 
-
-Here are the few suggestions to rectify it:
-
-* Try logging in to the `hbase shell`
-* Do a simple scan of any one of the `tsdb` tables by doing a `scan 'tsdb'` inside the hbase shell
-
-If there wasn't any issue, simply disable and drop the tsdb tables are create them again and finally restart the opentsdb component.
-
-If there was an issue, logout of the hbase shell and execute the following commands.
-
-    # stop hbase
-    /usr/local/hbase-1.2.0/bin/stop-all.sh
-    
-    # remove /hbase directory
-    sudo rm /root/hbase
-    
-    # start hbase
-    /usr/local/hbase-1.2.0/bin/start-all.sh
-
-    # create the necessary hbase tables
-    echo "create 'tsdb', 'cf'" | hbase shell
-    echo "create 'tsdb-uid', 'cf'" | hbase shell
-    echo "create 'tsdb-tree', 'cf'" | hbase shell
-    echo "create 'tsdb-meta', 'cf'" | hbase shell
-
-    # start opentsdb 
-    sudo service opentsdb start
-    
-#### Can I upgrade the Ubuntu OS?
-
-We are currently running Ubuntu 14.04 but its not advisable to upgrade the OS to the newer version as several init scripts won't run as expected i.e. please refrain from doing a `sudo apt-get upgrade`
-
-But `sudo apt-get update` should be fine and shouldn't cause any issues.
+* Apache Spark: [https://spark.apache.org/docs/1.6.1/quick-start.html](https://spark.apache.org/docs/1.6.1/quick-start.html)
