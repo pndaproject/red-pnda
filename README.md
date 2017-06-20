@@ -23,6 +23,24 @@ If you are installing the OVA file on Virtualbox, please refer to [Installing on
 
 If you are installing the OVA file on VMware Fusion, please refer to [Installing on Fusion Guide](installing_on_fusion_guide.md).
 
+## MD5 checksum
+
+The md5 hash of the present Red PNDA .OVA file is
+
+    fb858f4b8d05d746c331f8d771a9952d
+    
+Please check if the md5 checksum is the same. If it doesn't match, it usually means the download was corrupted and you might have to re-download the file.
+
+On Mac, to find out the md5 checksum, enter
+
+    md5 <path-to-ova-file>
+    
+On Linux,
+    
+    md5sum <path-to-ova-file>
+
+On Windows, check out [HashCheck](http://code.kliu.org/hashcheck/) for instructions.
+
 ## VM SSH access
 
 If you are using Mac or Linux OS, you should be able to connect to the Red-PNDA VM using ssh from your host machine to the host-only/bridged adapter IP address of the VM. 
