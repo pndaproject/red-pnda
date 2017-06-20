@@ -1,6 +1,6 @@
 # red-pnda
 
-<img src="logo/pnda1r-trans.png" alt="Red PNDA logo" style="width: 30px;"/>
+<img src="logo/pnda1r-trans.png" alt="Red PNDA logo" width="400" height="300"/>
 
 This framework provisions a minimal set of the PNDA ([pnda.io](http://pnda.io)) components to enable developers writing apps targeted at the full PNDA stack, to experiment with the PNDA components in a smaller, lightweight environment. Data exploration and app prototyping is supported using Jupyter and Apache Spark. 
 

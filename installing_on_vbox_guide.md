@@ -7,7 +7,7 @@ If you don't have VirtualBox installed, please download it [here](https://www.vi
 **Step 0:** Before we begin, it's important to have a host-only network set up on Virtualbox.
 If you don't have one, go to Preferences -> Network -> Host-Only Networks
 
-<img src="images/virtualbox_images/host_only_1.png" alt="Step 1" style="width: 300px;"/>
+<img src="images/virtualbox_images/host_only_1.png" alt="Host Only 1" width="400" height="300"/>
 
 If the list is empty, please click on the Add button the right to create a Host-Only network.
 
@@ -15,11 +15,11 @@ Then, double-click on the **vboxnet0** network option.
 
 You should see something like this:
 
-<img src="images/virtualbox_images/host_only_2.png" alt="Step 1" style="width: 300px;"/>
+<img src="images/virtualbox_images/host_only_2.png" alt="Host Only 2" width="400" height="300"/>
 
 Click on DHCP Server tab and click on Enable Server.
 
-<img src="images/virtualbox_images/host_only_3.png" alt="Step 1" style="width: 300px;"/>
+<img src="images/virtualbox_images/host_only_3.png" alt="Host Only 3" width="400" height="300"/>
 
 Click Ok and exit.
 
