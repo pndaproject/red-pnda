@@ -15,7 +15,7 @@ curl -s -H "Content-Type: application/json" -X PUT -d '{"name":"pnda", "email":"
 # Change the password
 curl -s -H "Content-Type: application/json" -X PUT -d '{"oldPassword": "admin", "newPassword":"pndapnda", "confirmNew":"pndapnda"}' http://pnda:admin@localhost:3000/api/user/password
 
-cp files/create_or_update_ds.py /opt/pnda/
+cp $1/files/create_or_update_ds.py /opt/pnda/
 
 python ./create_or_update_ds.py pnda pndapnda http://localhost:3000 '{ "name": "PNDA OpenTSDB", "type": "opentsdb", "url": "http://localhost:4242", "access": "direct", "basicAuth": false, "isDefault": true }'
 

@@ -8,7 +8,7 @@ cd /usr/local/kafka_2.11-0.10.2.0
 # kafka will use  the standalone zookeeper instead of creating it's own
 # start kafka server
 
-cp files/kafka.conf /etc/init/
+cp $1/files/kafka.conf /etc/init/
 
 # start kafka
 sudo service kafka start

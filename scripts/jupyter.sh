@@ -20,12 +20,12 @@ echo "c.NotebookApp.password = u'sha1:33532cda8624:0f16e1af56365d9e6c65ccfbcae9c
 echo "c.NotebookApp.notebook_dir = u'/root/jupyter-notebooks'" >> ~/.jupyter/jupyter_notebook_config.py
 
 # jupyter init script
-cp files/jupyter.conf /etc/init
+cp $1/files/jupyter.conf /etc/init
 
 # create pyspark kernel
 mkdir -p /usr/local/share/jupyter/kernels/pyspark
 
-cp files/pyspark-kernel.json /usr/local/share/jupyter/kernels/pyspark/kernel.json
+cp $1/files/pyspark-kernel.json /usr/local/share/jupyter/kernels/pyspark/kernel.json
 
 sudo service jupyter restart
 

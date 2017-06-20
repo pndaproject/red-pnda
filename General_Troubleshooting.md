@@ -41,6 +41,12 @@ OpenTSDB might be a bit finicky sometimes, run this script to restart zk and ope
 
     bash /opt/pnda/zk-opentsdb-restart.sh
    
+#### Q. Kafka/Zookeeper is grey and not changing color for long time.
+
+We've noticed that as well and are currently investigating what's causing this. Not sure if it's caused by the system being on idle state for too long.
+
+For now, the best thing to do is to reboot the VM.
+
 #### Q. Can I upgrade the Ubuntu OS?
 
 We are currently running Ubuntu 14.04 but its not advisable to upgrade the OS to the newer version as several init scripts won't run as expected i.e. please refrain from doing a `sudo apt-get upgrade`

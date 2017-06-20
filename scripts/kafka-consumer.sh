@@ -7,13 +7,13 @@ sudo pip install scikit-learn
 
 mkdir /data
 
-cp files/dataplatform-raw.avsc /opt/pnda
+cp $1/files/dataplatform-raw.avsc /opt/pnda
 
-cp files/consumer.py /opt/pnda
+cp $1/files/consumer.py /opt/pnda
 
-cp files/producer.py /opt/pnda
+cp $1/files/producer.py /opt/pnda
 
-cp files/kafka-consumer.conf /etc/init
+cp $1/files/kafka-consumer.conf /etc/init
 
 crontab -l > mycron
 #echo new cron into cron file

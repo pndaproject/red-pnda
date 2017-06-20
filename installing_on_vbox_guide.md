@@ -11,6 +11,8 @@ If you don't have one, go to Preferences -> Network -> Host-Only Networks
 
 If the list is empty, please click on the Add button the right to create a Host-Only network.
 
+Then, double-click on the **vboxnet0** network option.
+
 You should see something like this:
 
 <img src="images/virtualbox_images/host_only_2.png" alt="Step 1" style="width: 300px;"/>
@@ -41,11 +43,13 @@ Click "Continue"
 
 **Step 5:** It is recommended that you create a 'linked clone' of the base VM. In case there's a problem, you are able to quickly create a new working image without reinstalling from the OVA file.
 
+Right Click on the Red PNDA VM and click on "Clone".
+
 <img src="images/virtualbox_images/VBox_Step_5.png" alt="Step 5" style="width: 600px;"/>
 
 Click "Continue"
 
-**Step 6:** Click on "Linked Clone" and click "Clone".
+**Step 6:** Click on "Linked Clone" and click "Clone" again.
 
 <img src="images/virtualbox_images/VBox_Step_6.png" alt="Step 6" style="width: 600px;"/>
 

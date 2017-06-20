@@ -6,8 +6,17 @@ wget https://github.com/pndaproject/platform-console-frontend/archive/develop.zi
 unzip develop.zip
 rm develop.zip
 ln -s /opt/pnda/platform-console-frontend-develop/console-frontend /opt/pnda/console-frontend
-cd /opt/pnda/console-frontend
-npm install
+cd /opt/pnda/platform-console-frontend-develop/
+
+npm install -g grunt-cli
+
+bash build.sh
+
+tar xzf pnda-build/*.tar.gz
+
+rm -r console-frontend
+
+mv pnda-build/console-frontend- /opt/pnda/platform-console-frontend-develop/console-frontend
 
 rm conf/PNDA.json
 # add PNDA.json conf
@@ -51,7 +60,7 @@ cat <<EOF >  conf/PNDA.json
 EOF
 
 # add PNDA nginx conf to /etc/nginx/sites-enabled
-cp files/nginx-PNDA.conf  /etc/nginx/sites-enabled/PNDA.conf
+cp $1/files/nginx-PNDA.conf  /etc/nginx/sites-enabled/PNDA.conf
 
 # remove default nginx config
 rm /etc/nginx/sites-enabled/default

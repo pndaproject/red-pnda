@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+pwd=$(pwd)
 # export eth0 address for other scripts. This is assuming eth1 is the interface which is reachable from host network
 ip=$(/sbin/ip -o -4 addr list $1 | awk '{print $4}' | cut -d/ -f1)
 export ip=ip
@@ -62,46 +62,46 @@ source /etc/profile
 sudo pip install virtualenv
 
 # install console-backend-utils
-bash ./console-backend.sh
+bash ./console-backend.sh $pwd
 
 # install console-frontend
-bash ./console-frontend.sh
+bash ./console-frontend.sh $pwd
 
 # install jupyter
-bash ./jupyter.sh
+bash ./jupyter.sh $pwd
 
 # install hbase
-bash ./hbase.sh
+bash ./hbase.sh $pwd
 
 # install kafka
-bash ./kafka.sh
+bash ./kafka.sh $pwd
 
 # install jmxproxy
-bash ./jmxproxy.sh
+bash ./jmxproxy.sh $pwd
 
 # install platform testing general
-bash ./platform-testing.sh
+bash ./platform-testing.sh $pwd
 
 # install opentsdb
-bash ./opentsdb.sh
+bash ./opentsdb.sh $pwd
 
 # install grafana
-bash ./grafana-server.sh
+bash ./grafana-server.sh $pwd
 
 # install kafka-manager
-bash ./kafka-manager.sh
+bash ./kafka-manager.sh $pwd
 
 # start opentsdb after a delay of 15 seconds and start kafka-manager
-cp files/opentsdb-kafka-manager-boot.sh /opt/pnda
+cp $pwd/files/opentsdb-kafka-manager-boot.sh /opt/pnda
 
 # install crontab
 crontab -l > mycron
 #echo new cron into cron file
 echo "@reboot sleep 15 && /usr/local/hbase-1.2.0/bin/start-hbase.sh" >> mycron
-echo "@reboot bash /opt/pnda/opentsdb-kafka-manager-boot.sh > /dev/null 2>&1" >> mycron
+echo "@reboot bash /opt/pnda/opentsdb-kafka-manager-boot.sh" >> mycron
 # start spark master & slave worker on reboot
 host_name=$(hostname)
-echo "/usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-master.sh && /usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-slave.sh spark://$host_name:7077" >> mycron
+echo "@reboot /usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-master.sh && /usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-slave.sh spark://$host_name:7077" >> mycron
 
 #install new cron file
 crontab mycron
@@ -116,6 +116,8 @@ sudo pip install scikit-learn
 
 bash ./platform-libraries.sh
 
-cp files/zk-opentsdb-restart.sh /opt/pnda
+cp $pwd/files/zk-opentsdb-restart.sh /opt/pnda
+
+cp $pwd/assign-ip.sh /opt/pnda
 
 sudo bash /opt/pnda/assign-ip.sh $1

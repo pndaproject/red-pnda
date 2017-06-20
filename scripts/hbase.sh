@@ -11,7 +11,7 @@ echo "export HBASE_MANAGES_ZK=false" >> conf/hbase-env.sh
 rm conf/hbase-site.xml
 
 # set hbase-site.xml
-cp files/hbase-site.xml $HBASE_HOME/
+cp $1/files/hbase-site.xml $HBASE_HOME/
 
 # start hbase
 $HBASE_HOME/bin/start-hbase.sh

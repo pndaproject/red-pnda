@@ -18,7 +18,7 @@ npm install
 cp -r /opt/pnda/console-backend-utils ./
 
 # upstart script for data-logger
-cp files/data-logger.conf /etc/init/
+cp $1/files/data-logger.conf /etc/init/
 
 sudo service data-logger start
 
@@ -56,6 +56,6 @@ module.exports = {
 EOF
 
 # upstart script for data-manager
-cp files/data-manager.conf /etc/init/
+cp $1/files/data-manager.conf /etc/init/
 
 sudo service data-manager start
