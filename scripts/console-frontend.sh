@@ -14,9 +14,10 @@ bash build.sh
 
 tar xzf pnda-build/*.tar.gz
 
-rm -r console-frontend
+rm -r /opt/pnda/platform-console-frontend-develop/console-frontend
 
-mv pnda-build/console-frontend- /opt/pnda/platform-console-frontend-develop/console-frontend
+mv pnda-build/console-frontend- pnda-build/console-frontend
+mv pnda-build/console-frontend /opt/pnda/platform-console-frontend-develop
 
 rm conf/PNDA.json
 # add PNDA.json conf
