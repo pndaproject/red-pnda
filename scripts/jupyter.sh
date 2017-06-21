@@ -27,6 +27,8 @@ mkdir -p /usr/local/share/jupyter/kernels/pyspark
 
 cp $1/files/pyspark-kernel.json /usr/local/share/jupyter/kernels/pyspark/kernel.json
 
+cp $1/files/PNDA+minimal+notebook.ipynb /root/jupyter-notebooks
+
 sudo service jupyter restart
 
 # javascript widget - enable

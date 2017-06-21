@@ -26,7 +26,7 @@ Run it as root:
 
 	cd <path-to-red-pnda-repository>
     sudo bash scripts/install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
-    
+
 It might take a while but once it's done, reboot your system once:
 
     sudo reboot

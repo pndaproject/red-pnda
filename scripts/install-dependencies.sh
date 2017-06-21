@@ -40,13 +40,13 @@ sudo apt-get install -y unzip
 # zookeeper
 sudo apt-get install -y zookeeperd
 
-# install scala 2.12.1
-wget http://www.scala-lang.org/files/archive/scala-2.12.1.tgz
+# install scala 2.11.7
+wget http://www.scala-lang.org/files/archive/scala-2.11.7.tgz
 sudo mkdir /usr/local/src/scala
-sudo tar xvf scala-2.12.1.tgz -C /usr/local/src/scala/
+sudo tar xvf scala-2.11.7.tgz -C /usr/local/src/scala/
 
 # add to PATH env variable
-echo "export PATH=/usr/local/src/scala/scala-2.12.1/bin:$PATH" >> /etc/profile
+echo "export PATH=/usr/local/src/scala/scala-2.11.7/bin:$PATH" >> /etc/profile
 
 source /etc/profile
 
