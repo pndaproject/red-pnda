@@ -127,6 +127,10 @@ The [Jupyter Notebook](http://jupyter.org) is a web application that allows you 
 
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
+## Grafana Server
+
+Default login credentials for Grafana is `pnda/pndapnda`
+
 ## Local Documentation
 
 A copy of this documentation is also available in the Red PNDA OVA at `/home/pnda/red-pnda-master`.
