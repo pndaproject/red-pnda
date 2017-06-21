@@ -27,9 +27,15 @@ If you are installing the OVA file on Virtualbox, please refer to [Installing on
 
 If you are installing the OVA file on VMware Fusion, please refer to [Installing on Fusion Guide](installing_on_fusion_guide.md).
 
+## Download
+
+To download the OVA image, please use one of the following locations
+[US](https://s3-us-west-1.amazonaws.com/red-pnda-us-w/Red_PNDA-0.2.0.ova)
+[Europe](https://s3.eu-west-2.amazonaws.com/red-pnda/Red_PNDA-0.2.0.ova)
+
 ## MD5 checksum
 
-The md5 hash of the present Red PNDA .OVA file is
+The md5 hash of the latest Red PNDA .OVA file is
 
     Red_PNDA-0.2.0.ova = a778639fef664baa3e68d51f82499d0f
     
