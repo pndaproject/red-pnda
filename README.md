@@ -8,6 +8,10 @@ Note - this framework is not implemented with either scalability nor HA in mind 
 
 The Red PNDA framework is intended as a platform for experimentation and is NOT formally supported at this point in time. Any issues encountered with the system can be reported to the standard PNDA support forums for informational purposes only.
 
+## Acknowledgement
+
+This work has been inspired by an initial concept created by Maros Marsalek ([https://github.com/marosmars](https://github.com/marosmars)) and Nick Hall ([https://github.com/cloudwiser](https://github.com/cloudwiser))
+
 ## Installation
 
 Tested with Ubuntu 14.04.5 distro.
@@ -17,7 +21,7 @@ VirtualBox minimum version : **5.1.14**
 
 VMWare Fusion: **8.5.x**
 
-Minimum amount of RAM/VCPU/Storage: **4GB/2 VCPUs/8GB**
+Minimum amount of RAM / VCPU / Storage: **4GB / 2 VCPUs / 8GB**
 
 If you are installing the OVA file on Virtualbox, please refer to [Installing on VirtualBox Guide](installing_on_vbox_guide.md).
 
@@ -27,19 +31,19 @@ If you are installing the OVA file on VMware Fusion, please refer to [Installing
 
 The md5 hash of the present Red PNDA .OVA file is
 
-    a778639fef664baa3e68d51f82499d0f
+   Red_PNDA-0.2.0.ova = a778639fef664baa3e68d51f82499d0f
     
-Please check if the md5 checksum is the same. If it doesn't match, it usually means the download was corrupted and you might have to re-download the file.
+Please check that the md5 checksum is the same. If it doesn't match, it usually means the download was corrupted and you might have to re-download the file.
 
-On Mac, to find out the md5 checksum, enter
+On Mac, to find out the md5 checksum, open a terminal window and enter the following command:
 
     md5 <path-to-ova-file>
     
-On Linux,
+On Linux, to find out the md5 checksum, open a terminal window and enter the following command:
     
     md5sum <path-to-ova-file>
 
-On Windows, check out [HashCheck](http://code.kliu.org/hashcheck/) for instructions.
+Please note that Windows does not have a native md5 checksum application. Please use a third-party application such as [HashCheck](http://code.kliu.org/hashcheck/).
 
 ## VM SSH access
 
@@ -55,15 +59,15 @@ Red-PNDA makes use the following open source components:
 * Console Backend - [https://github.com/pndaproject/platform-console-backend](https://github.com/pndaproject/platform-console-backend)
 * Platform Testing - [https://github.com/pndaproject/platform-testing](https://github.com/pndaproject/platform-testing)
 * Platform Libraries - [https://github.com/pndaproject/platform-libraries](https://github.com/pndaproject/platform-libraries)
-* Kafka 0.10.2.0
-* Jupyter Notebook.
-* Apache Spark 1.6.1
-* Apache Hbase 1.2.0
-* OpenTSDB 2.2.0
-* Grafana 4.3.1 
-* Kafka Manager 1.3.3.6
+* Kafka 0.10.2.0 - [http://kafka.apache.org](http://kafka.apache.org)
+* Jupyter Notebook - [http://jupyter.org](http://jupyter.org)
+* Apache Spark 1.6.1 - [http://spark.apache.org](http://spark.apache.org)
+* Apache Hbase 1.2.0 - [http://hbase.apache.org](http://hbase.apache.org)
+* OpenTSDB 2.2.0 - [http://opentsdb.net](http://opentsdb.net)
+* Grafana 4.3.1 - [https://grafana.com](https://grafana.com)
+* Kafka Manager 1.3.3.6 - [https://github.com/yahoo/kafka-manager](https://github.com/yahoo/kafka-manager)
 * Example Kafka Clients - [https://github.com/pndaproject/example-kafka-clients](https://github.com/pndaproject/example-kafka-clients)
-* Jmxproxy 3.2.0
+* Jmxproxy 3.2.0 - [https://github.com/mk23/jmxproxy](https://github.com/mk23/jmxproxy)
 
 ## Data Ingestion
 
@@ -76,7 +80,7 @@ The `raw.log.localtest` topic is a generic topic; you could use this topic to in
 
 The `avro.log.localtest` topic can be used to ingest PNDA avro encoded data.
 
-Note that if you use the `avro.log.localtest` topic, data is flushed to the disk of the VM.
+Note that if you use the `avro.log.localtest` topic, data is written to the disk of the VM.
 
 By default data is stored in the `/data` directory of the VM's filesystem.
 
@@ -113,17 +117,17 @@ If you want to use Logstash to ingest avro-encoded data, refer to the [Logstash 
 
 ## Jupyter Notebooks
 
-The [Jupyter Notebook](http://jupyter.org) is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. In Red PNDA, it supports exploration and presentation of data from local FS and HBase.
+The [Jupyter Notebook](http://jupyter.org) is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. In Red PNDA, it supports exploration and presentation of data from the local file system.
 
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
 ## Local Documentation
 
-A copy of this documentation is also available in the Red PNDA OVA at `/home/pnda/red-pnda-master` should you ever need one.
+A copy of this documentation is also available in the Red PNDA OVA at `/home/pnda/red-pnda-master`.
 
 ## Shutdown
 
-Suspending the VM is not supported, please reboot or do a clean shutdown of the VM as an alternative.
+Suspending the VM is not supported. Please reboot or do a clean shutdown of the VM.
 
 To shutdown the VM in VBox, right-click on the VM and click on `Close -> Power Off` to do a graceful shutdown.
 
@@ -135,9 +139,9 @@ Please refer to our [Troubleshooting guide](General_Troubleshooting.md) for tips
 
 ## Roll your own Red PNDA
 
-If you are interested to roll your own Red PNDA either on your local machine or on the cloud without installing the .OVA file, then this one is for you.
+If you are interested in creating your own Red PNDA, either on your local machine or in a VM without installing the .OVA file, please refer to this [guide](roll_your_own_RED_PNDA.md) for further details.
 
-Refer to this [guide](roll_your_own_RED_PNDA.md) for further details.
+
 
 ## Further Reading
 
