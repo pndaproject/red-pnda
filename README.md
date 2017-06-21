@@ -31,7 +31,7 @@ If you are installing the OVA file on VMware Fusion, please refer to [Installing
 
 The md5 hash of the present Red PNDA .OVA file is
 
-   Red_PNDA-0.2.0.ova = a778639fef664baa3e68d51f82499d0f
+    Red_PNDA-0.2.0.ova = a778639fef664baa3e68d51f82499d0f
     
 Please check that the md5 checksum is the same. If it doesn't match, it usually means the download was corrupted and you might have to re-download the file.
 
