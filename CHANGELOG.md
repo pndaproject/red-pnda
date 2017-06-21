@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ### 0.2.0
 
-* Added troubleshooting tips to documentation
+* Added troubleshooting tips to the documentation
 * Added "How to Gracefully Shutdown" section to the documentation
 * Added "How to do a MD5 Checksum" section to the documentation
 * Added "How to Roll your own Red PNDA" section to the documentation
