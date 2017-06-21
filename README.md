@@ -117,6 +117,10 @@ The [Jupyter Notebook](http://jupyter.org) is a web application that allows you 
 
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
+## Local Documentation
+
+A copy of this documentation is also available in the Red PNDA OVA at `/home/pnda/red-pnda-master` should you ever need one.
+
 ## Shutdown
 
 Suspending the VM is not supported, please reboot or do a clean shutdown of the VM as an alternative.
