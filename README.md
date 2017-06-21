@@ -35,9 +35,7 @@ To download the OVA image, please use one of the following locations
 
 ## MD5 checksum
 
-The md5 hash of the latest Red PNDA .OVA file is
-
-    Red_PNDA-0.2.0.ova = a778639fef664baa3e68d51f82499d0f
+The md5 hash of the latest Red PNDA .OVA file can be found at [md5_checksum.md](https://github.com/pndaproject/red-pnda/blob/master/md5_checksum.md)
     
 Please check that the md5 checksum is the same. If it doesn't match, it usually means the download was corrupted and you might have to re-download the file.
 
