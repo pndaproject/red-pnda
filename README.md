@@ -125,6 +125,8 @@ If you want to use Logstash to ingest avro-encoded data, refer to the [Logstash 
 
 The [Jupyter Notebook](http://jupyter.org) is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. In Red PNDA, it supports exploration and presentation of data from the local file system.
 
+The default password for the Jupyter Notebook is `pnda`
+
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
 ## Grafana Server
