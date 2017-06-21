@@ -8,10 +8,6 @@
 * Spark Web UI is on port `8080`
 * Jupyter is on port `9000`
 
-#### Q. What's the login credentials for the Grafana Server?
-
-Use `pnda/pndapnda` as the login credentials.
-
 #### Q. Why isn't Packages, Apps and Datasets tabs active on the Console Tab?
 
 Red PNDA currently doesn't include the services which provide those functionalities.
