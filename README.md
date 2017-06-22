@@ -129,6 +129,8 @@ The default password for the Jupyter Notebook is `pnda`
 
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
+For those who are new to PNDA, there’s a network-related dataset (BGP updates from the Internet) and an accompanying tutorial Juypter notebook named `Introduction to Big Data Analytics.ipynb`, to help you get started.
+
 ## Grafana Server
 
 Default login credentials for Grafana is `pnda/pndapnda`

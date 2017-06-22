@@ -46,17 +46,17 @@ We recommend logstash 2.3.4, the latest version at the time of writing.
 ### Prerequisites
 
 Install Java (if you haven't done so):
-```sh
+
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
     sudo apt-get install oracle-java8-installer
-```
+
 
 **Important:** Install ruby 2.x using rvm.
-```sh
+
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
     curl -sSL https://get.rvm.io | bash -s stable --ruby
-```
+
 
 Follow the instruction this produces (in your case the location will be different):
  
@@ -70,21 +70,21 @@ Create the source directory:
 ```
 
 ### Install logstash 2.3.4
-```sh
+
     cd /opt/logstash
     wget https://download.elastic.co/logstash/logstash/logstash-2.3.4.tar.gz
     tar -zxvf logstash-2.3.4.tar.gz
-```
+
 
 ### Download the PNDA avro codec
 
 From [here](https://github.com/pndaproject/logstash-codec-pnda-avro/releases)
 
 ### Add avro codec to logstash
-```sh
+
     cd /opt/logstash/logstash-2.3.4
     bin/logstash-plugin install /opt/logstash/prod-logstash-codec-avro/logstash-codec-platformavro-3.1.1.gem
-```
+
 
 You should see an `Installation successful` message.
 
@@ -109,10 +109,10 @@ As an example, we will see how to read json data and send it to PNDA.
 Save the above configuration in `logstash.conf`.
 
 Then run logstash:
-```sh
+
     cd logstash-2.3.4/
     bin/logstash agent -f logstash.conf
-```
+
 
 You should see a `Logstash startup completed` message printed on the console. If you don't see this message, something went wrong in your setup or there's an error in your config.
 
@@ -122,10 +122,11 @@ Inject one line per event:
 
 
 Start kafka consumer (if you are using local kafka cluster):
-```sh
+
     cd $KAFKA_HOME
-    bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
-```
+    
+    bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic valid.messages --from-beginning
+
 
 You should be able to see the syslog event we just sent.
 
