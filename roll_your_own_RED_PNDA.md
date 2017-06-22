@@ -18,16 +18,20 @@ Also assumes you are running on Linux Ubuntu 14.04 distro.
 
 Clone this repository to get a copy of the installation scripts
 
+	sudo apt-get install git
+	git clone https://github.com/pndaproject/red-pnda.git
+
 ## Next Steps
 
 The starting point would be to refer to the **`scripts/install-dependencies.sh`** file which installs all the necessary dependencies and starts installing the required components one by one.
 
 Run it as root:
 
-	cd <path-to-red-pnda-repository>
-    sudo bash scripts/install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
+	cd red-pnda
+	cd scripts
+    sudo bash install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
 
-It might take a while but once it's done, reboot your system once:
+Grab a coffee as it might take a while but once it's done, reboot your system once:
 
     sudo reboot
 
