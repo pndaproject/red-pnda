@@ -27,6 +27,7 @@ The starting point would be to refer to the **`scripts/install-dependencies.sh`*
 
 Run it as root:
 
+    sudo su #important
 	cd red-pnda
 	cd scripts
     sudo bash install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>

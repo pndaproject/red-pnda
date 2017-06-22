@@ -44,6 +44,7 @@ sudo apt-get install -y zookeeperd
 wget http://www.scala-lang.org/files/archive/scala-2.11.7.tgz
 sudo mkdir /usr/local/src/scala
 sudo tar xvf scala-2.11.7.tgz -C /usr/local/src/scala/
+rm scala-2.11.7.tgz
 
 # add to PATH env variable
 echo "export PATH=/usr/local/src/scala/scala-2.11.7/bin:$PATH" >> /etc/profile
@@ -53,6 +54,7 @@ source /etc/profile
 # install spark 1.6.1 standalone
 wget https://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz
 tar xzf spark-1.6.1-bin-hadoop2.6.tgz -C /usr/local/
+rm spark-1.6.1-bin-hadoop2.6.tgz
 
 # add to PATH env variable
 echo "export PATH=/usr/local/spark-1.6.1-bin-hadoop2.6/bin:$PATH" >> /etc/profile
