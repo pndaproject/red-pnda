@@ -1,7 +1,7 @@
 #!/bin/bash
 wget https://archive.apache.org/dist/hbase/1.2.0/hbase-1.2.0-bin.tar.gz
 tar xzf hbase-1.2.0-bin.tar.gz -C /usr/local/
-
+rm hbase-1.2.0-bin.tar.gz
 HBASE_HOME=/usr/local/hbase-1.2.0
 cd $HBASE_HOME
 
