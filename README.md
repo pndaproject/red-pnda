@@ -77,7 +77,11 @@ Red-PNDA makes use the following open source components:
 
 ## Data Ingestion
 
-By default, there are two kafka topics created for easy usage.
+For detailed instructions on different data ingress methods, refer to this [guide](http://pnda.io/pnda-guide/producer/)
+
+### Kafka
+
+Using Kafka with red-pnda is easy. By default, there are two kafka topics created for easy usage.
 
 1. raw.log.localtest
 2. avro.log.localtest
@@ -96,7 +100,7 @@ For example, if you streamed avro-encoded data on 20th June 2017 at 5PM, your da
      
  directory structure.
 
-### Sample Kafka Producer
+#### Sample Kafka Producer
 
 We have also provided a sample Kafka producer in python. This will send one avro encoded event to the `avro.log.logtest` topic per execution, so feel free to play around with it.
 
@@ -117,9 +121,7 @@ If the data has been encoded correctly, then the Avro tools will be able to deco
       "rawdata" : "python-random-9343-loop-0"
     }
 
-### Logstash
 
-If you want to use Logstash to ingest avro-encoded data, refer to the [Logstash guide](Logstash_guide.md).
 
 ## Jupyter Notebooks
 
