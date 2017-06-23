@@ -43,6 +43,8 @@ If you see any issue with opentsdb service, it might require a restart as it mig
 
 Go to your browser and type `http://<your-ip-here>` to view the PNDA console.
 
+Note: If you are using AWS or any other cloud provider, refer to this [guide](Connecting_on_cloud.md)
+
 Congratulations, you have successfully installed Red PNDA on your own!
 
 
