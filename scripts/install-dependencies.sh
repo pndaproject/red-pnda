@@ -109,7 +109,7 @@ echo "@reboot /usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-master.sh && /usr/
 crontab mycron
 rm mycron
 
-bash ./kafka-consumer.sh
+bash ./kafka-consumer.sh $1
 
 # install useful libs
 sudo pip install pandas
