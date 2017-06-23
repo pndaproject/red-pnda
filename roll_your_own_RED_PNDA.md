@@ -30,7 +30,7 @@ Run it as root:
     sudo su #important
 	cd red-pnda
 	cd scripts
-    sudo bash install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
+    bash install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
 
 Grab a coffee as it might take a while but once it's done, reboot your system once:
 
