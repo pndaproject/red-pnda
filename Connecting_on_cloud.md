@@ -27,8 +27,7 @@ Then click on the first selection and then click on 'Edit Selection'
 
 Click 'OK'. Make sure the extension is enabled, you should see a blue indicator to the right of your address bar!
 
-* Type the private or public IP of your ec2 instance in the browser and you should see the console
-* Note the console can take 10-15 secs to show the active running status
+* Type the private IP of your cloud instance in the browser and you should see the PNDA console up and running!
 * Magic!
 
  
