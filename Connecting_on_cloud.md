@@ -30,4 +30,27 @@ Click 'OK'. Make sure the extension is enabled, you should see a blue indicator 
 * Type the private IP of your cloud instance in the browser and you should see the PNDA console up and running!
 * Magic!
 
- 
+## Security Group setting
+
+For reference, here is the correct incoming firewall/security group settings for cloud-hosted instances. 
+
+Type                | Protocol         | Port Range            | Source         |
+--------------------|------------------|-----------------------|----------------
+Custom TCP Rule     | TCP              | 3123                  | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 3123                  | ::/0
+HTTP                | TCP              | 80                    | 0.0.0.0/0
+HTTP                | TCP              | 80                    | ::/0
+Custom TCP Rule     | TCP              | 9000                  | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 9000                  | ::/0
+Custom TCP Rule     | TCP              | 8080                  | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 8080                  | ::/0
+SSH                 | TCP              | 22                    | 0.0.0.0/0
+SSH                 | TCP              | 22                    | ::/0
+Custom TCP Rule     | TCP              | 4242                  | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 4242                  | ::/0
+Custom TCP Rule     | TCP              | 3000-3001             | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 3000-3001             | ::/0
+Custom TCP Rule     | TCP              | 10900                 | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 10900                 | ::/0
+Custom TCP Rule     | TCP              | 9092                  | 0.0.0.0/0
+Custom TCP Rule     | TCP              | 9092                  | ::/0
