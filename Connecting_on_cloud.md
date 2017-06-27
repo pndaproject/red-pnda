@@ -1,12 +1,13 @@
 # Connecting to your instance on the cloud
 
-If you're using EC2 or any other cloud provider as a means to test out red-pnda, then chances are you might not be able to connect to the PNDA console through an elastic IP.
+If you're using EC2 or any other cloud provider as a means to test out red-pnda, then the chances are you might not be able to connect to the PNDA console through an elastic IP.
 
-Here are the steps to overcome the limitation:
+Here are the steps to overcome this limitation:
 
-* ssh to your cloud instance with a '-D' flag
+* ssh to your cloud instance with the '-D' and '-q' flags 
+* '-q' sets the logging to quiet and suppresses any error messages
        
-        ssh -i /path/to/your/key.pem -D 8888 ubuntu@54.x.x.x 
+        ssh -i /path/to/your/key.pem -q -D 8888 ubuntu@54.x.x.x 
         
 * Download FoxyProxy extension for your browser. Please use the following links to download
 
@@ -26,7 +27,8 @@ Then click on the first selection and then click on 'Edit Selection'
 
 Click 'OK'. Make sure the extension is enabled, you should see a blue indicator to the right of your address bar!
 
-* Type the private IP of your ec2 instance in the browser and behold, Magic!
+* Type the private IP of your cloud instance in the browser and you should see the PNDA console up and running!
+* Magic!
 
 ## Security Group setting
 
@@ -52,4 +54,3 @@ Custom TCP Rule     | TCP              | 10900                 | 0.0.0.0/0
 Custom TCP Rule     | TCP              | 10900                 | ::/0
 Custom TCP Rule     | TCP              | 9092                  | 0.0.0.0/0
 Custom TCP Rule     | TCP              | 9092                  | ::/0
-
