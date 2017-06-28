@@ -75,6 +75,13 @@ Red-PNDA makes use the following open source components:
 
 For detailed instructions on different data ingress methods, refer to this [guide](http://pnda.io/pnda-guide/producer/)
 
+### Avro tools install
+
+First, lets download the Avro support tools JAR
+
+    cd /opt/pnda
+    sudo wget http://www-eu.apache.org/dist/avro/avro-1.7.7/java/avro-tools-1.7.7.jar
+
 ### Kafka
 
 Using Kafka with red-pnda is easy. By default, there are two kafka topics created for easy usage.
@@ -88,13 +95,11 @@ The `avro.log.localtest` topic can be used to ingest PNDA avro encoded data.
 
 Note that if you use the `avro.log.localtest` topic, data is written to the disk of the VM.
 
-By default data is stored in the `/data` directory of the VM's filesystem.
+By default data is stored in the `/data` directory of the VM's file system using a system-timestamp directory hierarchy
 
-For example, if you streamed avro-encoded data on 20th June 2017 at 5PM, your data will be stored in
+For example, if you streamed avro-encoded data on 20th June 2017 at 5PM, your data will be stored in...
 
     /data/year=2017/month=6/day=20/hour=17/dump.avro
-     
- directory structure.
 
 #### Sample Kafka Producer
 
@@ -105,7 +110,11 @@ We have also provided a sample Kafka producer in python. This will send one avro
     
 Depending on what time you send the data, it will be stored in
 
-    /data/year=x/month=x/day=x/hour=x/dump.avro
+    /data/year=yyyy/month=mm/day=dd/hour=hh/dump.avro
+    
+Where yyyy,mm,dd and hh can be retreived by using the system date command
+
+    date
     
 If the data has been encoded correctly, then the Avro tools will be able to decode it without any errors. In this case, dump.avro contains some netflow data and our schema is in a file named dataplatform-raw.avsc
 
@@ -116,8 +125,6 @@ If the data has been encoded correctly, then the Avro tools will be able to deco
       "host_ip" : "my_ipv6",
       "rawdata" : "python-random-9343-loop-0"
     }
-
-
 
 ## Jupyter Notebooks
 
