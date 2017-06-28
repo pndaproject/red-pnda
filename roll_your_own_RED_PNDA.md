@@ -25,12 +25,19 @@ Clone this repository to get a copy of the installation scripts
 
 The starting point would be to refer to the **`scripts/install-dependencies.sh`** file which installs all the necessary dependencies and starts installing the required components one by one.
 
-Run it as root:
+Login as root:
 
     sudo su #important
+
+**IMPORTANT:** If you're behind a proxy server, set the proxy ENV variables prior to running the script(s).
+
+    export http_proxy="http://PROXY_SERVER:PORT"
+    export https_proxy="https://PROXY_SERVER:PORT"
+
+Then, execute the install script:
+
 	cd red-pnda
-	cd scripts
-    bash install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
+    bash scripts/install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
 
 Grab a coffee as it might take a while but once it's done, reboot your system once:
 
@@ -43,7 +50,7 @@ If you see any issue with opentsdb service, it might require a restart as it mig
 
 Go to your browser and type `http://<your-ip-here>` to view the PNDA console.
 
-Note: If you are using AWS or any other cloud provider, refer to this [guide](Connecting_on_cloud.md)
+**Note:** If you are using AWS or any other cloud provider, refer to this [guide](Connecting_on_cloud.md)
 
 Congratulations, you have successfully installed Red PNDA on your own!
 

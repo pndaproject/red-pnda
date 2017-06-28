@@ -2,12 +2,19 @@
 
 # console-frontend
 cd /opt/pnda
+
+# if directory present, delete it
+rm -r platform-console-frontend-develop >/dev/null 2>&1
+rm console-frontend >/dev/null 2>&1
+rm /etc/nginx/sites-enabled/PNDA.conf >/dev/null 2>&1
+
 wget https://github.com/pndaproject/platform-console-frontend/archive/develop.zip
 unzip develop.zip
 rm develop.zip
 ln -s /opt/pnda/platform-console-frontend-develop/console-frontend /opt/pnda/console-frontend
 cd /opt/pnda/platform-console-frontend-develop/
 
+# install grunt-cli
 npm install -g grunt-cli
 
 bash build.sh
@@ -18,9 +25,8 @@ rm -r /opt/pnda/platform-console-frontend-develop/console-frontend
 
 mv console-frontend- console-frontend
 
-rm conf/PNDA.json
 # add PNDA.json conf
-cat <<EOF >  conf/PNDA.json
+cat <<EOF >  console-frontend/conf/PNDA.json
 {
   "clustername": "Red PNDA",
   "edge_node": "$ip",
@@ -60,9 +66,9 @@ cat <<EOF >  conf/PNDA.json
 EOF
 
 # add PNDA nginx conf to /etc/nginx/sites-enabled
-cp $1/files/nginx-PNDA.conf  /etc/nginx/sites-enabled/PNDA.conf
+cp $1/scripts/files/nginx-PNDA.conf  /etc/nginx/sites-enabled/PNDA.conf
 
 # remove default nginx config
-rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-enabled/default >/dev/null 2>&1
 # restart nginx service
 sudo service nginx restart

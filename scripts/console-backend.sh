@@ -1,5 +1,12 @@
 #!/bin/bash
 cd /opt/pnda
+
+# if directory & soft links present, delete it
+rm -r platform-console-backend-develop >/dev/null 2>&1
+rm console-backend-data-logger >/dev/null 2>&1
+rm console-backend-data-manager >/dev/null 2>&1
+rm console-backend-utils >/dev/null 2>&1
+
 wget https://github.com/pndaproject/platform-console-backend/archive/develop.zip
 unzip develop.zip
 rm develop.zip
@@ -18,7 +25,7 @@ npm install
 cp -r /opt/pnda/console-backend-utils ./
 
 # upstart script for data-logger
-cp $1/files/data-logger.conf /etc/init/
+cp $1/scripts/files/data-logger.conf /etc/init/
 
 sudo service data-logger start
 
@@ -56,6 +63,6 @@ module.exports = {
 EOF
 
 # upstart script for data-manager
-cp $1/files/data-manager.conf /etc/init/
+cp $1/scripts/files/data-manager.conf /etc/init/
 
 sudo service data-manager start

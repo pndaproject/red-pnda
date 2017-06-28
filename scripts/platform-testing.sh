@@ -1,5 +1,9 @@
 #!/bin/bash
 cd /opt/pnda
+
+rm -r platform-testing-develop >/dev/null 2>&1
+rm platform-testing-general >/dev/null 2>&1
+
 wget https://github.com/pndaproject/platform-testing/archive/develop.zip
 unzip develop.zip
 rm develop.zip
@@ -15,12 +19,12 @@ pip install -r requirements.txt
 pip install -r plugins/kafka/requirements.txt
 pip install -r plugins/zookeeper/requirements.txt
 
-cp $1/files/platform-testing-general-kafka.conf /etc/init
+cp $1/scripts/files/platform-testing-general-kafka.conf /etc/init
 
-cp $1/files/platform-testing-general-zookeeper.conf /etc/init
+cp $1/scripts/files/platform-testing-general-zookeeper.conf /etc/init
 
 # a python script to return OK status for hbase and spark components. Hard coded to return OK on every run - need to change this
-cp $1/files/hbase_spark_metric.py /opt/pnda
+cp $1/scripts/files/hbase_spark_metric.py /opt/pnda
 
 # install crontab
 crontab -l > mycron

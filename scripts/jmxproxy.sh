@@ -15,6 +15,6 @@ echo "server:
 ln -s jmxproxy-3.2.0.jar jmxproxy.jar
 
 # jmxproxy upstart script
-cp $1/files/jmxproxy.conf  /etc/init
+cp $1/scripts/files/jmxproxy.conf  /etc/init
 
 sudo service jmxproxy start

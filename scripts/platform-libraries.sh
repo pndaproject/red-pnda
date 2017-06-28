@@ -1,5 +1,9 @@
 #/bin/bash
 cd /opt/pnda
+
+rm -r platform-libraries-develop >/dev/null 2>&1
+rm platform-libraries >/dev/null 2>&1
+
 wget https://github.com/pndaproject/platform-libraries/archive/develop.zip
 unzip develop.zip
 rm develop.zip
