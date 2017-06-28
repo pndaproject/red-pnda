@@ -29,11 +29,7 @@ If you are installing the OVA file on VMware Fusion, please refer to [Installing
 
 ## Download
 
-To download the OVA image, please use one of the following locations
-
-[US](https://s3-us-west-1.amazonaws.com/red-pnda-us-w/Red_PNDA-0.2.0.ova)
-
-[Europe](https://s3.eu-west-2.amazonaws.com/red-pnda/Red_PNDA-0.2.0.ova)
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red_PNDA-0.2.0.ova)
 
 ## MD5 checksum
 
