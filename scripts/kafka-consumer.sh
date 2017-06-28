@@ -3,17 +3,20 @@
 sudo pip install kafka-python
 sudo pip install avro
 sudo pip install pandas
+sudo pip install scipy
 sudo pip install scikit-learn
 
-mkdir /data
+if [ ! -d /data ]; then
+	mkdir /data
+fi
 
-cp $1/files/dataplatform-raw.avsc /opt/pnda
+cp $1/scripts/files/dataplatform-raw.avsc /opt/pnda
 
-cp $1/files/consumer.py /opt/pnda
+cp $1/scripts/files/consumer.py /opt/pnda
 
-cp $1/files/producer.py /opt/pnda
+cp $1/scripts/files/producer.py /opt/pnda
 
-cp $1/files/kafka-consumer.conf /etc/init
+cp $1/scripts/files/kafka-consumer.conf /etc/init
 
 crontab -l > mycron
 #echo new cron into cron file
