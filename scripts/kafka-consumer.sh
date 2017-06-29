@@ -1,10 +1,10 @@
 #/bin/bash
 # simple python script
-sudo pip install kafka-python
-sudo pip install avro
-sudo pip install pandas
-sudo pip install scipy
-sudo pip install scikit-learn
+if [[ $2 -eq 1 ]]; then
+	sudo pip --proxy ${http_proxy} install kafka-python avro scipy
+else
+	sudo pip install kafka-python avro scipy
+fi
 
 if [ ! -d /data ]; then
 	mkdir /data

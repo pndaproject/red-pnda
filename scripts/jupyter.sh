@@ -2,9 +2,13 @@
 
 if [[ ! $(pip freeze | grep jupyter)  ]]; then
 	sudo apt-get -y install ipython ipython-notebook
-	sudo -H pip install --upgrade pip
-	sudo -H pip install jupyter
-
+	if [[ $2 -eq 1 ]]; then
+		sudo pip --proxy ${http_proxy} install --upgrade pip
+		sudo pip --proxy ${http_proxy} install jupyter
+	else
+		sudo -H pip install --upgrade pip
+		sudo -H pip install jupyter
+	fi
 	# to run pyspark on jupyter notebook, enter
 	echo "export PYSPARK_DRIVER_PYTHON=jupyter" >> ~/.bashrc
 	echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook --ip=0.0.0.0 --port=9000'" >> ~/.bashrc

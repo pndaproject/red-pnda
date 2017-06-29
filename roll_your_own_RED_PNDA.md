@@ -33,6 +33,11 @@ Login as root:
 
     export http_proxy="http://PROXY_SERVER:PORT"
     export https_proxy="https://PROXY_SERVER:PORT"
+    
+Also, don't forget to add your proxy in the `/etc/apt/apt.conf` file. It should look like this
+
+    Acquire::http::proxy "http://PROXY_SERVER:PORT";
+    Acquire::https::proxy "http://PROXY_SERVER:PORT";
 
 Then, execute the install script:
 

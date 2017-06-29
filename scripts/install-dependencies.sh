@@ -6,6 +6,13 @@ if [ $# -eq 0 ]
     exit 1
 fi
 
+# By default, we assume there's no proxy i.e. 0
+proxy=0
+# if proxy env variable is set, change the npm config
+if [[ ! -z "${http_proxy}" ]]; then
+	proxy=1
+fi
+
 pwd=$(pwd)
 # export eth0 address for other scripts. This is assuming eth1 is the interface which is reachable from host network
 ip=$(/sbin/ip -o -4 addr list $1 | awk '{print $4}' | cut -d/ -f1)
@@ -27,10 +34,21 @@ sudo apt-get install -y nodejs
 
 # install java8
 sudo apt-get install -y python-software-properties debconf-utils
-sudo add-apt-repository -y ppa:webupd8team/java
+
+if [[ $proxy -eq 1 ]]; then
+	sudo -E add-apt-repository -y ppa:webupd8team/java
+	# npm specific config
+	npm config set strict-ssl false
+	npm config set registry http://registry.npmjs.org/
+else
+	sudo add-apt-repository -y ppa:webupd8team/java
+	echo "No proxy required for npm"
+fi
+
 sudo apt-get update
 echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
 sudo apt-get install -y oracle-java8-installer
+sudo apt install oracle-java8-set-default
 
 # virtualbox guest additions
 # sudo mount /dev/cdrom /media/cdrom
@@ -44,7 +62,6 @@ sudo apt-get install -y unzip
 
 # zookeeper
 sudo apt-get install -y zookeeperd
-
 
 if [ ! -d /usr/local/scala ]; then
 
@@ -77,15 +94,12 @@ echo "export PATH=/usr/local/spark-1.6.1-bin-hadoop2.6/bin:$PATH" >> /etc/profil
 
 source /etc/profile
 
-sudo pip install virtualenv
-
-# if proxy env variable is set, change the npm config
-if [[ ! (-z "${http_proxy}") || ! (-z "${HTTP_PROXY}") ]]; then
-	npm config set strict-ssl false
-	npm config set registry http://registry.npmjs.org/
+if [[ $proxy -eq 1 ]]; then
+	sudo pip --proxy ${http_proxy} install virtualenv
 else
-	echo "No proxy required for npm"
+	sudo pip install virtualenv
 fi
+sudo pip install virtualenv
 
 # install console-backend-utils
 bash $pwd/scripts/console-backend.sh $pwd
@@ -94,7 +108,7 @@ bash $pwd/scripts/console-backend.sh $pwd
 bash $pwd/scripts/console-frontend.sh $pwd
 
 # install jupyter
-bash $pwd/scripts/jupyter.sh $pwd
+bash $pwd/scripts/jupyter.sh $pwd $proxy
 
 # install hbase
 bash $pwd/scripts/hbase.sh $pwd
@@ -133,14 +147,16 @@ echo "@reboot /usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-master.sh && /usr/
 crontab mycron
 rm mycron
 
-bash $pwd/scripts/kafka-consumer.sh $pwd
+bash $pwd/scripts/kafka-consumer.sh $pwd $proxy
 
 # install useful libs
-sudo pip install pandas
-sudo pip install matplotlib
-sudo pip install scikit-learn
+if [[ $proxy -eq 1 ]]; then
+	sudo pip --proxy ${http_proxy} install pandas matplotlib scikit-learn
+else
+	sudo pip install pandas matplotlib scikit-learn
+fi
 
-bash $pwd/scripts/platform-libraries.sh
+bash $pwd/scripts/platform-libraries.sh $proxy
 
 cp $pwd/scripts/files/zk-opentsdb-restart.sh /opt/pnda
 

@@ -9,7 +9,6 @@ if [[ ! $(dpkg -l | grep opentsdb)  ]]; then
 	sudo dpkg -i opentsdb-2.2.0_all.deb
 
 	# remove deb file
-	rm opentsdb-2.2.0_all.deb
 	# create hbase tables
 	echo "create 'tsdb', 'cf'" | /usr/local/hbase-1.2.0/bin/hbase shell
 	echo "create 'tsdb-uid', 'cf'" | /usr/local/hbase-1.2.0/bin/hbase shell
