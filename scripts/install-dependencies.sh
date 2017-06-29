@@ -99,7 +99,6 @@ if [[ $proxy -eq 1 ]]; then
 else
 	sudo pip install virtualenv
 fi
-sudo pip install virtualenv
 
 # install console-backend-utils
 bash $pwd/scripts/console-backend.sh $pwd
