@@ -31,6 +31,10 @@ if [[ ! $(pip freeze | grep jupyter)  ]]; then
 
 	cp $1/scripts/files/PNDA+minimal+notebook.ipynb /root/jupyter-notebooks
 
+	mkdir -p /data/year=2017/month=7/day=4/hour=14
+	cp $1/scripts/files/dump.json /data/year=2017/month=7/day=4/hour=14
+	cp $1/scripts/files/tutorial.ipynb /root/jupyter-notebooks
+
 	sudo service jupyter restart
 
 	# javascript widget - enable

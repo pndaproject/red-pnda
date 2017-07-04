@@ -29,7 +29,7 @@ If you are installing the OVA file on VMware Fusion, please refer to [Installing
 
 ## Download
 
-The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red_PNDA-0.2.0.ova)
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red_PNDA-0.2.1.ova)
 
 ## MD5 checksum
 
@@ -75,13 +75,6 @@ Red-PNDA makes use the following open source components:
 
 For detailed instructions on different data ingress methods, refer to this [guide](http://pnda.io/pnda-guide/producer/)
 
-### Avro tools install
-
-First, lets download the Avro support tools JAR
-
-    cd /opt/pnda
-    sudo wget http://www-eu.apache.org/dist/avro/avro-1.7.7/java/avro-tools-1.7.7.jar
-
 ### Kafka
 
 Using Kafka with red-pnda is easy. By default, there are two kafka topics created for easy usage.
@@ -93,38 +86,29 @@ The `raw.log.localtest` topic is a generic topic; you could use this topic to in
 
 The `avro.log.localtest` topic can be used to ingest PNDA avro encoded data.
 
-Note that if you use the `avro.log.localtest` topic, data is written to the disk of the VM.
+Note that if you use the `raw.log.localtest` topic, data is written to the disk of the VM.
 
 By default data is stored in the `/data` directory of the VM's file system using a system-timestamp directory hierarchy
 
-For example, if you streamed avro-encoded data on 20th June 2017 at 5PM, your data will be stored in...
+For example, if you streamed data on 20th June 2017 at 5PM, your data will be stored in...
 
-    /data/year=2017/month=6/day=20/hour=17/dump.avro
+    /data/year=2017/month=6/day=20/hour=17/dump.json
 
 #### Sample Kafka Producer
 
-We have also provided a sample Kafka producer in python. This will send one avro encoded event to the `avro.log.logtest` topic per execution, so feel free to play around with it.
+We have also provided a sample Kafka producer in python. This will send one json event to the `raw.log.logtest` topic per execution, so feel free to play around with it.
 
     cd /opt/pnda
     python producer.py
     
 Depending on what time you send the data, it will be stored in
 
-    /data/year=yyyy/month=mm/day=dd/hour=hh/dump.avro
+    /data/year=yyyy/month=mm/day=dd/hour=hh/dump.json
     
 Where yyyy,mm,dd and hh can be retreived by using the system date command
 
     date
     
-If the data has been encoded correctly, then the Avro tools will be able to decode it without any errors. In this case, dump.avro contains some netflow data and our schema is in a file named dataplatform-raw.avsc
-
-    root@red-pnda:/opt/pnda# java -jar avro-tools-1.7.7.jar fragtojson --schema-file dataplatform-raw.avsc /data/year=2017/month=6/day=14/hour=20/dump.avro
-    {
-      "timestamp" : 1497464526286,
-      "src" : "ESC",
-      "host_ip" : "my_ipv6",
-      "rawdata" : "python-random-9343-loop-0"
-    }
 
 ## Jupyter Notebooks
 
@@ -135,6 +119,8 @@ The default password for the Jupyter Notebook is `pnda`
 Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Jupyter
 
 For those who are new to PNDA, there’s a network-related dataset (BGP updates from the Internet) and an accompanying tutorial Juypter notebook named `Introduction to Big Data Analytics.ipynb`, to help you get started.
+
+Also, there's a sample tutorial named `tutorial.ipynb` provided to do some basic analysis with data dumped to disk via Kafka through Spark DataFrames.
 
 ## Grafana Server
 
