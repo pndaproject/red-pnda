@@ -29,15 +29,16 @@ import avro.io
 import random
 from kafka import KafkaProducer
 import ssl
+import json
 
 # Path to user.avsc avro schema
 schema_path="/opt/pnda/dataplatform-raw.avsc"
- 
+
 # Kafka topic
-topic = "avro.log.localtest"
+topic = "raw.log.localtest"
 schema = avro.schema.parse(open(schema_path).read())
 
-extra=False 
+extra=False
 loopMode=False
 rangeValue=1
 sslEnable=False
@@ -77,16 +78,9 @@ else:
 
 
 for i in xrange(rangeValue):
-      writer = avro.io.DatumWriter(schema)
-      bytes_writer = io.BytesIO()
-      encoder = avro.io.BinaryEncoder(bytes_writer)
       #Prepare our msg data
       rawvarie="python-random-"+str(random.randint(10,10000))+"-loop-"+str(i)
-      writer.write({"timestamp": current_milli_time(), "src": "ESC", "host_ip": "my_ipv6", "rawdata": rawvarie}, encoder)
-      raw_bytes = bytes_writer.getvalue()
-      if extra:
-           elements = [0, 0, 0, 0, 23]
-           extrabytes = bytes(bytearray(elements))
-      producer.send(topic, extrabytes+raw_bytes)
+      data = {"timestamp": current_milli_time(), "src": "ESC", "host_ip": "my_ipv6", "rawdata": rawvarie}
+      producer.send(topic, json.dumps(data))
       if rangeValue > 1:
             time.sleep(0.5)

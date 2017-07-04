@@ -39,28 +39,29 @@ schema = avro.schema.parse(open(schema_path).read())
 useextra = False
 useavro = False
 sslEnable = False
-avroFileName = "dump.avro"
+jsonFileName = "dump.json"
 base_dir = "/data"
 
 #make base dir
 now = datetime.datetime.now()
 dest_path = base_dir + "/year=" + str(now.year) + "/month=" + str(now.month) + "/day=" + str(now.day) + "/hour=" + str(now.hour)
-dest_file = dest_path + "/" + avroFileName
+dest_file = dest_path + "/" + jsonFileName
 try:
   os.makedirs(dest_path)
 except OSError as exception:
   if exception.errno != errno.EEXIST:
     raise
-    
 # open file for writing
 f = open(dest_file, 'a')
 
 def consume_message(message):
 
-  print(message)
   newmessage = message.value
   if not useavro:
     print(message.value)
+    f.write(message.value)
+    f.write("\n")
+    f.flush()
   else:
     if useextra:
       print('<'*10)
@@ -77,7 +78,7 @@ def consume_message(message):
       ## but display Alerts
       if len(b) >= 5:
           b_schema_id=bytearray(b[1:5])
-          b_schema = struct.unpack('>I', b_schema_id)[0]
+    b_schema = struct.unpack('>I', b_schema_id)[0]
           print("Read scheme Id: [",b_schema,"] expected: [",schema_id,"]")
           if b_schema != schema_id:
                print('!'*10)
@@ -93,10 +94,6 @@ def consume_message(message):
     decoder = avro.io.BinaryDecoder(bytes_reader)
     reader = avro.io.DatumReader(schema)
     msg = reader.read(decoder)
-    print(msg)
-    # write to local FileSystem
-    f.write(newmessage)
-    f.flush()
 
 class Consumer(threading.Thread):
   daemon = True
