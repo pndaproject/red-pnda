@@ -78,7 +78,7 @@ def consume_message(message):
       ## but display Alerts
       if len(b) >= 5:
           b_schema_id=bytearray(b[1:5])
-    b_schema = struct.unpack('>I', b_schema_id)[0]
+          b_schema = struct.unpack('>I', b_schema_id)[0]
           print("Read scheme Id: [",b_schema,"] expected: [",schema_id,"]")
           if b_schema != schema_id:
                print('!'*10)
