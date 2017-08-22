@@ -27,6 +27,8 @@ If you are installing the OVA file on Virtualbox, please refer to [Installing on
 
 If you are installing the OVA file on VMware Fusion, please refer to [Installing on Fusion Guide](installing_on_fusion_guide.md).
 
+Please note that we have yet to test the OVA on other virtualized environments e.g. deploying via vSphere on VMWare ESXi. Successful deployment in such environments are likely to be dependent on specific hardware compatiility as well as needing manual network interface mapping.
+
 ## Download
 
 The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red_PNDA-0.2.1.ova)
