@@ -11,8 +11,21 @@ if [ ! -d "$KAFKA_HOME" ]; then
 	# remove kafka tar
 	rm kafka_2.11-0.10.2.0.tgz
 
+<<<<<<< HEAD
 	cd /usr/local/kafka_2.11-0.10.2.0
 
+=======
+<<<<<<< HEAD
+# start kafka
+sudo service kafka start
+=======
+	cd /usr/local/kafka_2.11-0.10.2.0
+
+	echo "listeners=PLAINTEXT://$2:9092" >> config/server.properties
+
+	echo "advertised.listeners=PLAINTEXT://$2:9092" >> config/server.properties
+
+>>>>>>> 010518c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
 	# start kafka server
 
 	cp $1/scripts/files/kafka.conf /etc/init/
@@ -21,4 +34,9 @@ if [ ! -d "$KAFKA_HOME" ]; then
 	sudo service kafka start
 else
 	echo "Kafka already installed. Moving on!"
+<<<<<<< HEAD
 fi
+=======
+fi
+>>>>>>> 15a717c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
+>>>>>>> 010518c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
