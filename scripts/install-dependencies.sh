@@ -7,7 +7,7 @@ if [ $# -eq 0 ]
 fi
 
 pwd=$(pwd)
-# export reachable network address for other scripts.
+# get IP address
 ip=$(/sbin/ip -o -4 addr list $1 | awk '{print $4}' | cut -d/ -f1)
 
 sudo apt-get update
@@ -100,15 +100,7 @@ bash $pwd/scripts/jupyter.sh $pwd
 bash $pwd/scripts/hbase.sh $pwd
 
 # install kafka
-<<<<<<< HEAD
-bash $pwd/scripts/kafka.sh $pwd
-=======
-<<<<<<< HEAD
-bash ./kafka.sh $pwd
-=======
 bash $pwd/scripts/kafka.sh $pwd $ip
->>>>>>> 15a717c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
->>>>>>> 010518c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
 
 # install jmxproxy
 bash $pwd/scripts/jmxproxy.sh $pwd
@@ -141,15 +133,7 @@ echo "@reboot /usr/local/spark-1.6.1-bin-hadoop2.6/sbin/start-master.sh && /usr/
 crontab mycron
 rm mycron
 
-<<<<<<< HEAD
-bash $pwd/scripts/kafka-consumer.sh $pwd
-=======
-<<<<<<< HEAD
-bash ./kafka-consumer.sh
-=======
 bash $pwd/scripts/kafka-consumer.sh $pwd $ip
->>>>>>> 15a717c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
->>>>>>> 010518c... Update Kafka scripts to advertise reachable IP address from outside instead of just relying on local connections
 
 # install useful libs
 sudo pip install pandas
