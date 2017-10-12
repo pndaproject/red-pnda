@@ -4,9 +4,12 @@
 
 **OS Prerequisite**
 
-This guide assumes your machine have access to the internet.
+This guide assumes two thigs:
 
-Also assumes you are running on Linux Ubuntu 14.04 distro.
+   1. your machine has access to the internet to install the various packages
+   2. you are running on the Linux Ubuntu 14.04 distro. 
+
+Other distros may work but we haven't tested against these yet
 
 **RAM:** 4GB
 
@@ -16,52 +19,56 @@ Also assumes you are running on Linux Ubuntu 14.04 distro.
 
 ## Before we get started
 
-Clone this repository to get a copy of the installation scripts
+Clone this repository into your local file system to copy the installation scripts:
 
-	sudo apt-get install git
-	git clone https://github.com/pndaproject/red-pnda.git
+    $ sudo apt-get install git
+    $ git clone https://github.com/pndaproject/red-pnda.git
 
 ## Next Steps
 
-The starting point would be to refer to the **`scripts/install-dependencies.sh`** file which installs all the necessary dependencies and starts installing the required components one by one.
+The installation is driven by the **`scripts/install-dependencies.sh`** file which installs all the necessary dependencies and starts installing the required components one-by-one. But first...
 
 Login as root:
 
-    sudo su #important
+    $ sudo su # this is important
 
 **IMPORTANT:** If you're behind a proxy server, set the proxy ENV variables prior to running the script(s).
 
-    export http_proxy="http://PROXY_SERVER:PORT"
-    export https_proxy="https://PROXY_SERVER:PORT"
+    $ export http_proxy="http://<your_http_proxy_server:port>"
+    $ export https_proxy="https://<your_https_proxy_server:port>"
 
-Then, execute the install script:
+Check which reachable network interface(s) you have available:
 
-	cd red-pnda
-    bash scripts/install-dependencies.sh <reachable-network-interface here e.g. eth0 or eth1>
+    $ /sbin/ifconfig -a
 
-Grab a coffee as it might take a while but once it's done, reboot your system once:
+Then execute the install script:
 
-    sudo reboot
+    $ cd red-pnda
+    $ bash scripts/install-dependencies.sh <reachable-network-interface from previous e.g. eth0 or eth1>
 
-If you see any issue with opentsdb service, it might require a restart as it might be a bit finicky, execute the script:
+Grab a coffee as it might take a while but, once it's done, reboot your system once:
 
-    sudo bash /opt/pnda/zk-opentsdb-restart.sh
+    $ sudo reboot
+
+If the opentsdb service doesn't start, it might require a forced restart as it can be a bit finicky...so execute the following script:
+
+    $ sudo bash /opt/pnda/zk-opentsdb-restart.sh
     
-
-Go to your browser and type `http://<your-ip-here>` to view the PNDA console.
+Go to your browser and type `http://<your_ip_address>` to view the PNDA console.
 
 **Note:** If you are using AWS or any other cloud provider, refer to this [guide](Connecting_on_cloud.md)
 
-Congratulations, you have successfully installed Red PNDA on your own!
+Congratulations...you should now have a successfully-installed-and-running Red PNDA! 
 
+If you do hit problems though, please raise an issue here
 
 ## Development
 
 Alternatively, for development purposes, you can start the PNDA console in local mode:
 
-    cd /opt/pnda/console-frontend
-    sudo npm install -g grunt-cli
-    grunt
-    grunt serve
+    $ cd /opt/pnda/console-frontend
+    $ sudo npm install -g grunt-cli
+    $ grunt
+    $ grunt serve
 
-Go to your browser and type `http://<your-ip-here>:8006` to view the console.
+Go to your browser and type `http://<your_ip_address>:8006` to view the console.
