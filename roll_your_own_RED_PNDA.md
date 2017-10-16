@@ -43,8 +43,8 @@ Check which reachable network interface(s) you have available:
 
 Then execute the install script:
 
-    $ cd red-pnda
-    $ bash scripts/install-dependencies.sh <reachable-network-interface from previous e.g. eth0 or eth1>
+    $ cd red-pnda/scripts
+    $ bash install-dependencies.sh <reachable-network-interface from previous e.g. eth0 or eth1>
 
 Grab a coffee as it might take a while but, once it's done, reboot your system once:
 
