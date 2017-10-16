@@ -1,41 +1,46 @@
 #!/bin/bash
-cd /opt/pnda
+
+set -e
+source ../utils.sh
+
+cd $MAIN_DIR
 
 # if directory & soft links present, delete it
-rm -r platform-console-backend-develop >/dev/null 2>&1
-rm console-backend-data-logger >/dev/null 2>&1
-rm console-backend-data-manager >/dev/null 2>&1
-rm console-backend-utils >/dev/null 2>&1
+rm -r platform-console-backend-develop >/dev/null 2>&1 || true
+rm console-backend-data-logger >/dev/null 2>&1 || true
+rm console-backend-data-manager >/dev/null 2>&1 || true
+rm console-backend-utils >/dev/null 2>&1 || true
 
 wget https://github.com/pndaproject/platform-console-backend/archive/develop.zip
 unzip develop.zip
 rm develop.zip
 
 # console-backend-utils
-ln -s /opt/pnda/platform-console-backend-develop/console-backend-utils /opt/pnda/console-backend-utils
-cd /opt/pnda/console-backend-utils
+ln -s $MAIN_DIR/platform-console-backend-develop/console-backend-utils $MAIN_DIR/console-backend-utils
+cd $MAIN_DIR/console-backend-utils
 npm install
 
-cd /opt/pnda
+cd $MAIN_DIR
 # console-backend-data-logger
-ln -s /opt/pnda/platform-console-backend-develop/console-backend-data-logger /opt/pnda/console-backend-data-logger
-cd /opt/pnda/console-backend-data-logger
+ln -s $MAIN_DIR/platform-console-backend-develop/console-backend-data-logger $MAIN_DIR/console-backend-data-logger
+cd $MAIN_DIR/console-backend-data-logger
 npm install
 
-cp -r /opt/pnda/console-backend-utils ./
+cp -r $MAIN_DIR/console-backend-utils ./
 
 # upstart script for data-logger
-cp $1/scripts/files/data-logger.conf /etc/init/
+cp $1/components/files/data-logger.conf /etc/init/
 
+echo 'starting data-logger service'
 sudo service data-logger start
 
 # console-backend-data-manager
-cd /opt/pnda
-ln -s /opt/pnda/platform-console-backend-develop/console-backend-data-manager /opt/pnda/console-backend-data-manager
-cd /opt/pnda/console-backend-data-manager
+cd $MAIN_DIR
+ln -s $MAIN_DIR/platform-console-backend-develop/console-backend-data-manager $MAIN_DIR/console-backend-data-manager
+cd $MAIN_DIR/console-backend-data-manager
 npm install
 
-cp -r /opt/pnda/console-backend-utils ./
+cp -r $MAIN_DIR/console-backend-utils ./
 
 rm ./conf/config.js
 
@@ -63,6 +68,7 @@ module.exports = {
 EOF
 
 # upstart script for data-manager
-cp $1/scripts/files/data-manager.conf /etc/init/
+cp $1/components/files/data-manager.conf /etc/init/
 
+echo 'starting data-manager service'
 sudo service data-manager start

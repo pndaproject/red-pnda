@@ -1,13 +1,15 @@
 #/bin/bash
-cd /opt/pnda
+set -e
+source ../utils.sh
+cd $MAIN_DIR
 
-rm -r platform-libraries-develop >/dev/null 2>&1
-rm platform-libraries >/dev/null 2>&1
+rm -r platform-libraries-develop >/dev/null 2>&1 || true
+rm platform-libraries >/dev/null 2>&1 || true
 
 wget https://github.com/pndaproject/platform-libraries/archive/develop.zip
 unzip develop.zip
 rm develop.zip
-ln -s /opt/pnda/platform-libraries-develop /opt/pnda/platform-libraries
+ln -s $MAIN_DIR/platform-libraries-develop $MAIN_DIR/platform-libraries
 cd platform-libraries
 sudo pip install -r requirements.txt
 python setup.py bdist_egg

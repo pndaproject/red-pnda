@@ -13,4 +13,8 @@
     <name>hbase.zookeeper.property.dataDir</name>
     <value>/root/zookeeper</value>
   </property>
+  <property>
+    <name>hbase.table.sanity.checks</name>
+    <value>false</value>
+  </property>
 </configuration>
