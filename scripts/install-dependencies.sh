@@ -37,7 +37,7 @@ ip=$(/sbin/ip -o -4 addr list $1 | awk '{print $4}' | cut -d/ -f1)
 sudo apt-get update
 
 # base working dir
-sudo mkdir /opt/pnda
+sudo mkdir /opt/pnda || true
 
 # install nginx
 sudo apt-get install -y nginx
