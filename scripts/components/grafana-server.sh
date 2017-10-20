@@ -11,6 +11,8 @@ sudo dpkg -i $GRAFANA_VERSION.deb
 
 sudo service grafana-server start
 
+sleep 10
+
 # Exit if the pnda user already exists
 curl --fail -s -H "Content-Type: application/json" -X GET http://pnda:pndapnda@localhost:3000/api/users || true
 
