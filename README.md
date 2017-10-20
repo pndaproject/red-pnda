@@ -75,6 +75,8 @@ Red-PNDA makes use the following open source components:
 
 ## Data Ingestion
 
+For instructions on how to use logstash to ingest data, refer to this [guide](logstash_guide.md)
+
 For detailed instructions on different data ingress methods, refer to this [guide](http://pnda.io/pnda-guide/producer/)
 
 ### Kafka
