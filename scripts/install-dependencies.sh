@@ -181,5 +181,5 @@ sudo bash /opt/pnda/assign-ip.sh $1
 echo "#####################################################"
 echo
 echo
-echo "Your Red-PNDA is successfully installed. Go to http://$ip on your browser to view the console!"
+echo "Your Red-PNDA is successfully installed. Please reboot your machine and go to http://$ip on your browser to view the PNDA console!"
 
