@@ -149,7 +149,7 @@ Default login credentials for Grafana is `pnda/pndapnda`
 
 ## Local Documentation
 
-A copy of this documentation is also available in the Red PNDA OVA at `/home/pnda/red-pnda-master`.
+A copy of this documentation is also available in the Red PNDA OVA at `/home/pnda/red-pnda-develop`.
 
 ## Shutdown
 
