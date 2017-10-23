@@ -31,7 +31,7 @@ Please note that we have yet to test the OVA on other virtualized environments e
 
 ## Download
 
-The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red_PNDA-0.2.1.ova)
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red_PNDA-0.2.2.ova)
 
 ## MD5 checksum
 
