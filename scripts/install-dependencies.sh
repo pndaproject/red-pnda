@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 source utils.sh
 
@@ -74,15 +75,14 @@ if [ ! -d $SCALA_HOME ]; then
 
 	# install scala
 	wget http://www.scala-lang.org/files/archive/$SCALA_VERSION.tgz
-	sudo mkdir $SCALA_HOME
-	sudo tar xvf $SCALA_VERSION.tgz -C $SCALA_HOME
-
+	sudo tar xvf $SCALA_VERSION.tgz -C /usr/local/
+	mv /usr/local/$SCALA_VERSION $SCALA_HOME
 	# remove scala tar file
 	rm $SCALA_VERSION.tgz
 fi
 
 # add to PATH env variable
-echo "PATH=$SCALA_HOME/$SCALA_VERSION/bin:$PATH" >> /etc/environment
+echo "PATH=$SCALA_HOME/bin:$PATH" >> /etc/environment
 
 source /etc/environment
 
@@ -157,7 +157,7 @@ echo "@reboot sleep 10 && $HBASE_HOME/bin/start-hbase.sh" >> mycron
 echo "@reboot bash /opt/pnda/opentsdb-kafka-manager-boot.sh" >> mycron
 # start spark master & slave worker on reboot
 host_name=$(hostname)
-echo "@reboot $SPARK_HOME/start-master.sh && $SPARK_HOME/sbin/start-slave.sh spark://$host_name:7077" >> mycron
+echo "@reboot $SPARK_HOME/sbin/start-master.sh && $SPARK_HOME/sbin/start-slave.sh spark://$host_name:7077" >> mycron
 
 #install new cron file
 crontab mycron

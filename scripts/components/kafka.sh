@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
+set -x
 
 source ../utils.sh
 
 
 echo "installing kafka.."
-wget http://apache.mirror.anlx.net/kafka/0.10.2.0/$KAFKA_VERSION.tgz
+wget http://archive.apache.org/dist/kafka/0.10.2.1/$KAFKA_VERSION.tgz
 tar xzf $KAFKA_VERSION.tgz -C /usr/local/
 
 # remove kafka tar file

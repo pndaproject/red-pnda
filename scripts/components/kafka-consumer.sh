@@ -1,6 +1,6 @@
 #/bin/bash
 set -e
-
+set -x
 source ../utils.sh
 
 # simple python script

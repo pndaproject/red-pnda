@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 source ../utils.sh
 
 cd $MAIN_DIR
