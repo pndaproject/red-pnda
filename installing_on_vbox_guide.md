@@ -63,7 +63,7 @@ Click "Continue"
 
 **Step 10:** Run the following command:
 
-    sudo sh assign-ip.sh eth0
+    sudo bash /home/pnda/assign-ip.sh eth0
 
 If prompted for a password, enter `pnda`
 

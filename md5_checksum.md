@@ -1,2 +1,2 @@
 
-Red_PNDA-0.2.0.ova = 545185f898995aff3af1eb37f598398a
+MD5 (Red_PNDA-0.2.2.ova) = 4eaff5542fd46eae48e1856f3295ac84
