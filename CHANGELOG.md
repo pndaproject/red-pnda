@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### 0.2.4
+
+* RED-PNDA now tracks PNDA 3.6 release.
+* All component versions are now on par with PNDA 3.6
+* More robust scripts to allow anyone to launch their own RED PNDA in their preferred environment.
+* Added a "Introduction to Big Data Analytics" Jupyter notebook as a kickstart on their big data journey.
+
 ### 0.2.0
 
 * Added troubleshooting tips to the documentation
