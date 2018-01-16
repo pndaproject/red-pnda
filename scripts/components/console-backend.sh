@@ -12,18 +12,18 @@ rm console-backend-data-logger >/dev/null 2>&1 || true
 rm console-backend-data-manager >/dev/null 2>&1 || true
 rm console-backend-utils >/dev/null 2>&1 || true
 
-wget https://github.com/pndaproject/platform-console-backend/archive/develop.zip
-unzip develop.zip
-rm develop.zip
+wget https://github.com/pndaproject/platform-console-backend/archive/release/$PNDA_RELEASE.zip
+unzip $PNDA_RELEASE.zip
+rm $PNDA_RELEASE.zip
 
 # console-backend-utils
-ln -s $MAIN_DIR/platform-console-backend-develop/console-backend-utils $MAIN_DIR/console-backend-utils
+ln -s $MAIN_DIR/platform-console-backend-release-$PNDA_RELEASE/console-backend-utils $MAIN_DIR/console-backend-utils
 cd $MAIN_DIR/console-backend-utils
 npm install
 
 cd $MAIN_DIR
 # console-backend-data-logger
-ln -s $MAIN_DIR/platform-console-backend-develop/console-backend-data-logger $MAIN_DIR/console-backend-data-logger
+ln -s $MAIN_DIR/platform-console-backend-release-$PNDA_RELEASE/console-backend-data-logger $MAIN_DIR/console-backend-data-logger
 cd $MAIN_DIR/console-backend-data-logger
 npm install
 
@@ -37,7 +37,7 @@ sudo service data-logger start
 
 # console-backend-data-manager
 cd $MAIN_DIR
-ln -s $MAIN_DIR/platform-console-backend-develop/console-backend-data-manager $MAIN_DIR/console-backend-data-manager
+ln -s $MAIN_DIR/platform-console-backend-release-$PNDA_RELEASE/console-backend-data-manager $MAIN_DIR/console-backend-data-manager
 cd $MAIN_DIR/console-backend-data-manager
 npm install
 

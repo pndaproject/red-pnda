@@ -7,10 +7,10 @@ cd $MAIN_DIR
 rm -r platform-testing-develop >/dev/null 2>&1 || true
 rm platform-testing-general >/dev/null 2>&1 || true
 
-wget https://github.com/pndaproject/platform-testing/archive/develop.zip
-unzip develop.zip
-rm develop.zip
-ln -s $MAIN_DIR/platform-testing-develop $MAIN_DIR/platform-testing-general
+wget https://github.com/pndaproject/platform-testing/archive/release/$PNDA_RELEASE.zip
+unzip $PNDA_RELEASE.zip
+rm $PNDA_RELEASE.zip
+ln -s $MAIN_DIR/platform-testing-release-$PNDA_RELEASE $MAIN_DIR/platform-testing-general
 cd $MAIN_DIR/platform-testing-general/src/main/resources
 
 # virtualenv

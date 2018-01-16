@@ -11,11 +11,11 @@ rm -r platform-console-frontend-develop >/dev/null 2>&1 || true
 rm console-frontend >/dev/null 2>&1 || true
 rm /etc/nginx/sites-enabled/PNDA.conf >/dev/null 2>&1 || true
 
-wget https://github.com/pndaproject/platform-console-frontend/archive/develop.zip
-unzip develop.zip
-rm develop.zip
-ln -s $MAIN_DIR/platform-console-frontend-develop/console-frontend $MAIN_DIR/console-frontend
-cd $MAIN_DIR/platform-console-frontend-develop/
+wget https://github.com/pndaproject/platform-console-frontend/archive/release/$PNDA_RELEASE.zip
+unzip $PNDA_RELEASE.zip
+rm $PNDA_RELEASE.zip
+ln -s $MAIN_DIR/platform-console-frontend-release-$PNDA_RELEASE/console-frontend $MAIN_DIR/console-frontend
+cd $MAIN_DIR/platform-console-frontend-release-$PNDA_RELEASE/
 
 # install grunt-cli
 npm install -g grunt-cli
@@ -24,7 +24,7 @@ bash build.sh
 
 tar xzf pnda-build/*.tar.gz
 
-rm -r $MAIN_DIR/platform-console-frontend-develop/console-frontend
+rm -r $MAIN_DIR/platform-console-frontend-release-$PNDA_RELEASE/console-frontend
 
 mv console-frontend- console-frontend
 
