@@ -87,10 +87,10 @@ For detailed instructions on different data ingress methods, refer to this [guid
 
     sudo vim $KAFKA_HOME/config/server.properties
 
-Add these two lines at the end of the file. In this example, `192.168.33.10` is my red-pnda IP address:
+Scroll down to line 141 and replace it with your IP address. In this example, `192.168.33.10` is my red-pnda IP address:
 
-    listeners=PLAINTEXT://192.168.33.10:9092
-    advertised.listeners=PLAINTEXT://192.168.33.10:9092
+    listeners=INGEST://192.168.33.10:9094,REPLICATION://127.0.0.1:9093,INTERNAL_PLAINTEXT://192.168.33.10:9092
+    advertised.listeners=INGEST://192.168.33.10:9094,REPLICATION://127.0.0.1:9093,INTERNAL_PLAINTEXT://192.168.33.10:9092
 
 Save and quit. Then restart kafka service.
 

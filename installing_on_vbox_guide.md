@@ -57,11 +57,13 @@ Click "Continue"
 
 **Step 8:** Use the default credentials (pnda/pnda) to login.
 
-**Step 9:** Run `ifconfig` command to check which network interface is reachable from host machine. In this example `eth0` is the active interface.
+**Step 9:** Run `ifconfig` command to check which network interface is reachable from host machine. In this example `eth0` is the active interface and `192.168.56.101` is the IP address.
 
 <img src="images/virtualbox_images/VBox_Step_8.png" alt="Step 8" style="width: 600px;"/>
 
-**Step 10:** Run the following command:
+**Step 10:** Navigate to [this](https://github.com/pndaproject/red-pnda#how-to-connect-to-red-pnda-kafka-instance) link and follow the step to properly configure Kafka.
+
+**Step 11:** Finally, run the following command:
 
     sudo bash /home/pnda/assign-ip.sh eth0
 
