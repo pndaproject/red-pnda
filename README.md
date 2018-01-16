@@ -63,7 +63,7 @@ Red-PNDA makes use the following open source components:
 * Console Backend - [https://github.com/pndaproject/platform-console-backend](https://github.com/pndaproject/platform-console-backend)
 * Platform Testing - [https://github.com/pndaproject/platform-testing](https://github.com/pndaproject/platform-testing)
 * Platform Libraries - [https://github.com/pndaproject/platform-libraries](https://github.com/pndaproject/platform-libraries)
-* Kafka 0.10.2.0 - [http://kafka.apache.org](http://kafka.apache.org)
+* Kafka 0.11.0.0 - [http://kafka.apache.org](http://kafka.apache.org)
 * Jupyter Notebook - [http://jupyter.org](http://jupyter.org)
 * Apache Spark 1.6.1 - [http://spark.apache.org](http://spark.apache.org)
 * Apache Hbase 1.2.0 - [http://hbase.apache.org](http://hbase.apache.org)
