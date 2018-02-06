@@ -24,7 +24,7 @@ Minimum amount of RAM / VCPU / Storage: **4GB / 2 VCPUs / 8GB**
 
 ## Running the OVA
 
-The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.4.ova)
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.6.ova)
 
 If you are installing the OVA file on Virtualbox, please refer to [Installing on VirtualBox Guide](installing_on_vbox_guide.md).
 
@@ -82,18 +82,7 @@ For detailed instructions on different data ingress methods, refer to this [guid
 
 #### How to connect to red-pnda kafka instance?
 
-**IMPORTANT**: To connect to the kafka instance running on red-pnda, you need to edit the config file and advertise your IP address like so:
-
-    sudo vim $KAFKA_HOME/config/server.properties
-
-Scroll down to line 141 and replace it with your IP address. In this example, `192.168.33.10` is my red-pnda IP address:
-
-    listeners=INGEST://192.168.33.10:9094,REPLICATION://127.0.0.1:9093,INTERNAL_PLAINTEXT://192.168.33.10:9092
-    advertised.listeners=INGEST://192.168.33.10:9094,REPLICATION://127.0.0.1:9093,INTERNAL_PLAINTEXT://192.168.33.10:9092
-
-Save and quit. Then restart kafka service.
-
-    sudo service kafka restart
+To connect to the red-pnda kafka instance, you can connect to the broker on `<ip>:9092`.
 
 #### Are there any default topics which I can use?
 
