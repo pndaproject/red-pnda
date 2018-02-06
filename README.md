@@ -12,26 +12,25 @@ The Red PNDA framework is intended as a platform for experimentation and is NOT 
 
 This work has been inspired by an initial concept created by Maros Marsalek ([https://github.com/marosmars](https://github.com/marosmars)) and Nick Hall ([https://github.com/cloudwiser](https://github.com/cloudwiser))
 
-## Installation
+## Prerequisites
 
 Tested with Ubuntu 14.04.5 distro.
 
-### Prerequisities
 VirtualBox minimum version : **5.1.14**
 
 VMWare Fusion: **8.5.x**
 
 Minimum amount of RAM / VCPU / Storage: **4GB / 2 VCPUs / 8GB**
 
+## Running the OVA
+
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.4.ova)
+
 If you are installing the OVA file on Virtualbox, please refer to [Installing on VirtualBox Guide](installing_on_vbox_guide.md).
 
 If you are installing the OVA file on VMware Fusion, please refer to [Installing on Fusion Guide](installing_on_fusion_guide.md).
 
 Please note that we have yet to test the OVA on other virtualized environments e.g. deploying via vSphere on VMWare ESXi. Successful deployment in such environments are likely to be dependent on specific hardware compatiility as well as needing manual network interface mapping.
-
-## Download
-
-The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.4.ova)
 
 ## MD5 checksum
 
