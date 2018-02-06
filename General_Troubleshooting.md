@@ -16,7 +16,7 @@ Red PNDA currently doesn't include the services which provide those functionalit
 
 Please execute this command on the VM terminal. 
 
-    bash /opt/pnda/zk-opentsdb-restart.sh
+    sudo service zookeeper restart
 
 Restarting Zookeeper should fix the problem. You should see Kafka turning back to green after a minute.
 
