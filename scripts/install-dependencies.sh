@@ -44,7 +44,7 @@ sudo mkdir /opt/pnda || true
 sudo apt-get install -y nginx
 
 # install python-pip & other dependencies
-sudo apt-get install -y python-pip python-dev build-essential libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev libsasl2-dev gnuplot git
+sudo apt-get install -y python-pip python-dev build-essential libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev libsasl2-dev gnuplot git libsnappy-dev
 
 # install nodejs
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
@@ -157,14 +157,11 @@ bash grafana-server.sh $pwd $ip
 # install kafka-manager
 bash kafka-manager.sh $pwd
 
-# start opentsdb after a delay of 15 seconds and start kafka-manager
-cp files/opentsdb-kafka-manager-boot.sh /opt/pnda
-
 # install crontab
 crontab -l > mycron
 #echo new cron into cron file
 echo "@reboot sleep 10 && $HBASE_HOME/bin/start-hbase.sh" >> mycron
-echo "@reboot bash /opt/pnda/opentsdb-kafka-manager-boot.sh" >> mycron
+echo "* * * * * bash /opt/pnda/zk-opentsdb-restart.sh" >> mycron
 # start spark master & slave worker on reboot
 host_name=$(hostname)
 echo "@reboot $SPARK_HOME/sbin/start-master.sh && $SPARK_HOME/sbin/start-slave.sh spark://$host_name:7077" >> mycron
@@ -176,9 +173,7 @@ rm mycron
 bash kafka-consumer.sh $pwd $ip
 
 # install useful python libraries
-sudo pip install pandas
-sudo pip install matplotlib
-sudo pip install scikit-learn
+sudo pip install findspark fastavro pandas matplotlib scikit-learn python-snappy
 
 bash platform-libraries.sh $pwd
 

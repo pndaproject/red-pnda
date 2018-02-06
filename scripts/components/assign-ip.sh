@@ -1,5 +1,6 @@
 #/bin/bash
 
+# get IP address from network interface
 if [ $# -eq 0 ]
   then
     echo "No arguments supplied. Please supply your reachable network interface e.g. eth0 or eth1"
@@ -8,6 +9,7 @@ fi
 
 ip=$(/sbin/ip -o -4 addr list $1 | awk '{print $4}' | cut -d/ -f1)
 
+# remove files
 rm /opt/pnda/console-frontend/conf/PNDA.json >/dev/null 2>&1
 rm /etc/init/data-manager.conf >/dev/null 2>&1
 
@@ -64,7 +66,18 @@ env PORT=3123
 exec node /opt/pnda/console-backend-data-manager/app.js
 EOF
 
-
-sudo service data-manager restart && sudo service nginx restart 
+# restart console-* services and zookeeper/opentsdb once
+sudo service data-manager restart && sudo service nginx restart
 sudo service zookeeper restart >/dev/null 2>&1
 sudo service opentsdb restart >/dev/null 2>&1
+
+# replace IP for KAFKA and restart services
+sed -i "s/localhost/$ip/g" /opt/pnda/consumer.py
+sed -i "s/localhost/$ip/g" /opt/pnda/producer.py
+sed -i "s/localhost/$ip/g" $KAFKA_HOME/config/server.properties
+sudo service kafka restart >/dev/null 2>&1
+sudo service kafka-consumer restart >/dev/null 2>&1
+
+echo "All done! Please go to $ip on your browser to view the Red-PNDA console"
+echo
+echo "Please use the Chrome incognito window or Firefox Private window to prevent any cache issues"

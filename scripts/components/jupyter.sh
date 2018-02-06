@@ -28,11 +28,18 @@ mkdir -p /usr/local/share/jupyter/kernels/pyspark
 
 cp $1/components/files/pyspark-kernel.json /usr/local/share/jupyter/kernels/pyspark/kernel.json
 
-cp $1/components/files/PNDA+minimal+notebook.ipynb /root/jupyter-notebooks
+cp $1/components/files/red-pnda-minimal-notebook.ipynb /root/jupyter-notebooks
+
+cp $1/components/files/pnda1r-trans.png /root/jupyter-notebooks
+
+# copy sample telemetry data
+cp -r $1/components/files/telemetry_data /root/jupyter-notebooks/
+# copy the anomaly detection notebook
+cp $1/components/files/red-pnda-anom-detect.ipynb /root/jupyter-notebooks
 
 mkdir -p /data/year=2017/month=7/day=4/hour=14
 cp $1/components/files/dump.json /data/year=2017/month=7/day=4/hour=14
-cp $1/components/files/tutorial.ipynb /root/jupyter-notebooks
+cp $1/components/files/tutorial.ipynb /root/jupyter-notebooks/spark-tutorial.ipynb
 
 sudo service jupyter restart
 
