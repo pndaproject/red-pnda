@@ -29,15 +29,13 @@ Click "Yes" if prompted.
 
 **Step 4:** Start the Cloned Red PNDA VM
 
-**Step 8:** Use the default credentials (pnda/pnda) to login.
+**Step 5:** Use the default credentials (pnda/pnda) to login.
 
-**Step 7:** Run the `ifconfig` command to check which network interface is reachable from host machine. In this example it is `eth0` and `192.168.192.129` is the IP address.
+**Step 6:** Run the `ifconfig` command to check which network interface is reachable from host machine. In this example it is `eth0` and `192.168.192.129` is the IP address.
 
 <img src="images/fusion_images/Fusion_Step_4.png" alt="Step 4" style="width: 600px;"/>
 
-**Step 9:** Navigate to [this](https://github.com/pndaproject/red-pnda#how-to-connect-to-red-pnda-kafka-instance) link and follow the step to properly configure Kafka.
-
-**Step 10:** Finally, run the following command:
+**Step 7:** Finally, run the following command:
 
     sudo bash /home/pnda/assign-ip.sh eth0
 
