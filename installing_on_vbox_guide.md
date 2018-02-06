@@ -61,9 +61,7 @@ Click "Continue"
 
 <img src="images/virtualbox_images/VBox_Step_8.png" alt="Step 8" style="width: 600px;"/>
 
-**Step 10:** Navigate to [this](https://github.com/pndaproject/red-pnda#how-to-connect-to-red-pnda-kafka-instance) link and follow the step to properly configure Kafka.
-
-**Step 11:** Finally, run the following command:
+**Step 10:** Finally, run the following command:
 
     sudo bash /home/pnda/assign-ip.sh eth0
 
