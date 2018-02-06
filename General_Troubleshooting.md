@@ -35,7 +35,7 @@ However, hbase logs are at `/usr/local/hbase-1.2.0/logs/` directory.
 
 OpenTSDB might be a bit finicky sometimes, run this script to restart zk and opentsdb. 98% of the times it solves the problem
 
-    bash /opt/pnda/zk-opentsdb-restart.sh
+    bash /opt/pnda/opentsdb-restart.sh
    
 #### Q. Kafka/Zookeeper is grey and not changing color for long time.
 
