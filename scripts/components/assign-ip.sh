@@ -74,7 +74,7 @@ sudo service opentsdb restart >/dev/null 2>&1
 # replace IP for KAFKA and restart services
 sed -i "s/localhost/$ip/g" /opt/pnda/consumer.py
 sed -i "s/localhost/$ip/g" /opt/pnda/producer.py
-sed -i "s/localhost/$ip/g" $KAFKA_HOME/config/server.properties
+sed -i "s/localhost/$ip/g" /usr/local/kafka_2.11-0.11.0.0/config/server.properties
 sudo service kafka restart >/dev/null 2>&1
 sudo service kafka-consumer restart >/dev/null 2>&1
 
