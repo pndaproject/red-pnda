@@ -34,7 +34,7 @@ Please note that we have yet to test the OVA on other virtualized environments e
 
 ## MD5 checksum
 
-The md5 hash of the latest Red PNDA .OVA file can be found at [md5_checksum.md](https://github.com/pndaproject/red-pnda/blob/master/md5_checksum.md)
+The md5 hash of the latest Red PNDA .OVA file can be found at [md5_checksum.md](https://github.com/pndaproject/red-pnda/blob/develop/md5_checksum.md)
     
 Please check that the md5 checksum is the same. If it doesn't match, it usually means the download was corrupted and you might have to re-download the file.
 
