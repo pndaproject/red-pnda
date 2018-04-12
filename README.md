@@ -24,7 +24,7 @@ Minimum amount of RAM / VCPU / Storage: **4GB / 2 VCPUs / 8GB**
 
 ## Running the OVA
 
-The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.6.ova)
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.7.ova)
 
 If you are installing the OVA file on Virtualbox, please refer to [Installing on VirtualBox Guide](installing_on_vbox_guide.md).
 
