@@ -162,6 +162,7 @@ crontab -l > mycron
 #echo new cron into cron file
 echo "@reboot sleep 10 && $HBASE_HOME/bin/start-hbase.sh" >> mycron
 echo "* * * * * bash /opt/pnda/zk-opentsdb-restart.sh" >> mycron
+echo "@reboot bash /opt/pnda/opentsdb-kafka-manager-boot.sh" >> mycron
 # start spark master & slave worker on reboot
 host_name=$(hostname)
 echo "@reboot $SPARK_HOME/sbin/start-master.sh && $SPARK_HOME/sbin/start-slave.sh spark://$host_name:7077" >> mycron
