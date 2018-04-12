@@ -49,10 +49,6 @@ Then execute the install script:
 Grab a coffee as it might take a while but, once it's done, reboot your system once:
 
     $ sudo reboot
-
-If the opentsdb service doesn't start, it might require a forced restart as it can be a bit finicky...so execute the following script:
-
-    $ sudo bash /opt/pnda/zk-opentsdb-restart.sh
     
 Go to your browser and type `http://<your_ip_address>` to view the PNDA console.
 
