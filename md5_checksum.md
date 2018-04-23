@@ -1,3 +1,3 @@
-MD5 (Red-PNDA_0.2.7.ova) = ebc89b3135a74e8371259b80fb144411
+MD5 (Red-PNDA_0.2.8.ova) = ae419530e259b5111b0e01cde6ec1f98
 
-MD5 (Red-PNDA_0.2.6.ova) = 044c152e0dfc3bda76bab5ed92e45b24
+MD5 (Red-PNDA_0.2.7.ova) = ebc89b3135a74e8371259b80fb144411
