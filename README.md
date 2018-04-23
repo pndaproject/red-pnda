@@ -24,7 +24,7 @@ Minimum amount of RAM / VCPU / Storage: **4GB / 2 VCPUs / 8GB**
 
 ## Running the OVA
 
-The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.7.ova)
+The latest OVA image can be downloaded from [here](http://d5zjefk3wzew6.cloudfront.net/Red-PNDA_0.2.8.ova)
 
 If you are installing the OVA file on Virtualbox, please refer to [Installing on VirtualBox Guide](installing_on_vbox_guide.md).
 
@@ -130,6 +130,8 @@ Please refer to our [Jupyter Guide](jupyter_guide.md) for steps on how to use Ju
 For those who are new to PNDA, there’s a network-related dataset (BGP updates from the Internet) and an accompanying tutorial Juypter notebook named `Introduction to Big Data Analytics.ipynb`, to help you get started.
 
 Also, there's a sample tutorial named `tutorial.ipynb` provided to do some basic analysis with data dumped to disk via Kafka through Spark DataFrames.
+
+If you are interested in data mining or anomaly detection, take a look at the `red-pnda-anom-detect.ipynb` where we work with telemetry data and try and detect unintentional traffic loss in the network.
 
 ## Grafana Server
 
