@@ -22,7 +22,7 @@ services:
   spark-slave:
     container_name: spark-slave
     hostname: spark-slave
-    image: repo.gradiant.org:9011/spark:2.3.0
+    image: gradiant/spark:2.3.0
     entrypoint:
     - /opt/spark/sbin/start-slave.sh
     - spark://spark-master:7077
