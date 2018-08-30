@@ -26,7 +26,10 @@ Docker Engine (tested with docker version **18.05.0-ce**)
 docker-compose (tested with docker-compose version **1.21.2**)
 
 
-Minimum amount of RAM / VCPU / Storage: TBD
+Minimum amount of RAM / VCPU / Storage: 4GB / 2 / 16GB
+Recommended amount of RAM / VCPU / Storage: 16GB / 4 / 60GB
+
+These values are illustrative since they depend on the data analytics application to run on PNDA.
 
 ## Deploying red-PNDA as docker containers
 
