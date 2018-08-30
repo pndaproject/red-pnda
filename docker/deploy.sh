@@ -14,7 +14,7 @@ echo "adding pnda user"
 PNDA_USER=pnda
 PNDA_GROUP=pnda
 docker exec -ti hdfs-namenode addgroup $PNDA_GROUP
-docker exec -ti hdfs-namenode adduser --gecos "" --ingroup=$PNDA_GROUP --disabled-password $PNDA_USER
+docker exec -ti hdfs-namenode adduser --gecos "" --ingroup=$PNDA_GROUP --shell /bin/bash --disabled-password $PNDA_USER
 docker exec -ti hdfs-namenode hdfs dfs -mkdir -p /user/$PNDA_USER
 docker exec -ti hdfs-namenode hdfs dfs -chown $PNDA_USER:$PNDA_GROUP /user/$PNDA_USER
 docker exec -ti hdfs-namenode hdfs dfs -chmod 770 /user/$PNDA_USER
