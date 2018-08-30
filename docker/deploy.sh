@@ -39,6 +39,11 @@ docker exec deployment-manager sh -c 'adduser -D pnda && echo "pnda:pnda" | chpa
 docker exec jupyter-ssh sh -c 'adduser -D pnda && echo "pnda:pnda" | chpasswd'
 
 echo "----------------  ADDING ssh keys to dm_keys volume   ----------------"
+mkdir -p dm_keys
+echo "Generating SSH Keys for Deployment Manager connections"
+        ssh-keygen -b 2048 -t rsa -f dm_keys/dm -q -N ""
+cp dm_keys/dm dm_keys/dm.pem
+
 docker cp dm_keys/ deployment-manager:/opt/pnda/
 docker exec -ti deployment-manager chown -R root:root /opt/pnda/dm_keys/
 docker exec -ti deployment-manager chmod 644 /opt/pnda/dm_keys/dm.pub

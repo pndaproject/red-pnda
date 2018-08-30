@@ -118,7 +118,6 @@ services:
     container_name: hbase-master
     hostname: hbase-master
     image: gradiant/hbase-master:2.0.1
-    #image: bde2020/hbase-master:1.0.0-hbase1.2.6
     environment:
       HBASE_CONF_hbase_rootdir: hdfs://hdfs-namenode:8020/hbase
       HBASE_CONF_hbase_cluster_distributed: "true"
