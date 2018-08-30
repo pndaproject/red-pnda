@@ -1,10 +1,14 @@
 #!/bin/bash
 
 echo "----------------  STARTING HDFS and HBASE   ----------------"
+docker-compose up -d zookeeper
 docker-compose up -d hdfs-namenode
 docker-compose up -d hdfs-datanode
-docker-compose up -d zookeeper
 docker-compose up -d hbase-master
+while ! docker exec -ti hdfs-namenode nc -vz hdfs-namenode:8020 ; do
+  echo "waiting for hdfs-namenode to start"
+  sleep 2
+done
 docker-compose up -d hbase-region
 
 echo "----------------  ADDING users to HDFS  ----------------"
@@ -31,7 +35,10 @@ docker exec -i hbase-master /bin/bash < opentsdb/create_opentsdb_hbase_tables.sh
 
 echo "----------------  ENABLING THRIFT API in HBASE MASTER  ----------------"
 docker exec -d hbase-master hbase thrift start -p 9090
-
+while ! docker exec -ti hbase-master nc -vz hbase-master:9090 ; do
+  echo "waiting for hbase thrift api to start"
+  sleep 2
+done
 echo "----------------  STARTING THE REST OF THE SERVICES   ----------------"
 docker-compose up -d
 echo "----------------  CREATING pnda user in services  ----------------"
