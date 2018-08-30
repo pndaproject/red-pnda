@@ -89,7 +89,8 @@ http://pnda:pnda@grafana:3000/api/datasources
 ./grafana/grafana-import-dashboards.sh grafana/PNDA-DM.json
 ./grafana/grafana-import-dashboards.sh grafana/PNDA-Hadoop.json
 ./grafana/grafana-import-dashboards.sh grafana/PNDA-Kafka.json
-echo ""
+echo "red-PNDA Deployment Finished - Opening console-frontend web ui"
+xdg-open http://console-frontend
 
 
 
