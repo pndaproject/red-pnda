@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # get IP address from network interface
 if [ $# -eq 0 ]
