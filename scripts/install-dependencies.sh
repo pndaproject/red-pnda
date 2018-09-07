@@ -15,7 +15,7 @@ pwd=$(pwd)
 if [[ "$pwd" == *scripts ]]
 then
     # do nothing
-	echo 
+    :
 else
     pwd+="/scripts"
 fi
