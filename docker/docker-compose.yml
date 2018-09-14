@@ -27,6 +27,22 @@ services:
     command:
     - worker
     - spark://spark-master:7077
+  flink-master:
+    container_name: flink-master
+    hostname: flink-master
+    image: flink:1.6.0-hadoop27-scala_2.11-alpine
+    command:
+    - jobmanager
+  flink-worker:
+    container_name: flink-worker
+    hostname: flink-worker
+    image: flink:1.6.0-hadoop27-scala_2.11-alpine
+    depends_on:
+    - flink-master
+    command:
+    - taskmanager
+    environment:
+    - JOB_MANAGER_RPC_ADDRESS=flink-master
   jupyter:
     container_name: jupyter
     hostname: jupyter
@@ -202,6 +218,7 @@ services:
     - DATA_MANAGER_HOST=console-backend
     - DATA_MANAGER_PORT=3123
     - KAFKA_MANAGER_URL=http://kafka-manager:10900
+    - FLINK_URL=http://flink-master:8081
     - OPENTSDB_URL=http://opentsdb:4242
     ports:
     - 80:80
