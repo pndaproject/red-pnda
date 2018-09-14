@@ -23,7 +23,7 @@ add_hostname data-service
 add_hostname package-repository
 add_hostname grafana
 add_hostname spark-master
-add_hostname spark-slave
+add_hostname spark-worker
 add_hostname kafka
 add_hostname hbase-master
 add_hostname hdfs-namenode
