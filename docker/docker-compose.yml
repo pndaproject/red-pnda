@@ -1,0 +1,265 @@
+version: '3'
+services:
+  gobblin:
+    container_name: gobblin
+    hostname: gobblin
+    image: pnda/gobblin:0.11.0-0.1.0
+    environment:
+    - HDFS_URL=hdfs://hdfs-namenode:8020
+    - MASTER_DATASET_DIRECTORY=/user/pnda/PNDA_datasets/datasets
+    - MASTER_DATASET_QUARANTINE_DIRECTORY=/user/pnda/PNDA_datasets/quarantine
+    - MAX_MAPPERS=4
+    - KAFKA_BROKERS=kafka:9092
+  spark-master:
+    container_name: spark-master
+    hostname: spark-master
+    image: gradiant/spark:2.3.0
+    command:
+    - master
+    environment:
+    - SPARK_MASTER_HOST=spark-master
+    - SPARK_MASTER_PORT=7077
+    - SPARK_MASTER_WEBUI_PORT=8080
+  spark-worker:
+    container_name: spark-worker
+    hostname: spark-worker
+    image: gradiant/spark:2.3.0
+    command:
+    - worker
+    - spark://spark-master:7077
+  flink-master:
+    container_name: flink-master
+    hostname: flink-master
+    image: flink:1.6.0-hadoop27-scala_2.11-alpine
+    command:
+    - jobmanager
+  flink-worker:
+    container_name: flink-worker
+    hostname: flink-worker
+    image: flink:1.6.0-hadoop27-scala_2.11-alpine
+    depends_on:
+    - flink-master
+    command:
+    - taskmanager
+    environment:
+    - JOB_MANAGER_RPC_ADDRESS=flink-master
+  jupyter:
+    container_name: jupyter
+    hostname: jupyter
+    image: pnda/jupyter:4.4.0
+    volumes:
+    - jupyter-home:/home
+    environment:
+    - SPARK_MASTER_URL=spark://spark-master:7077
+    - HADOOP_DISTRO=env
+    - HDFS_ROOT_URI=hdfs://hdfs-namenode:8020
+  jupyter-ssh:
+    container_name: jupyter-ssh
+    image: gradiant/openssh-server
+    network_mode: service:jupyter
+    volumes:
+    - jupyter-home:/home
+    depends_on:
+    - jupyter
+  grafana:
+    container_name: grafana
+    hostname: grafana
+    image: grafana/grafana:5.0.3
+    environment:
+    - GF_SECURITY_ADMIN_USER=pnda
+    - GF_SECURITY_ADMIN_PASSWORD=pnda
+    ports:
+    - 3000:3000
+    volumes:
+    - grafana:/var/lib/grafana
+  deployment-manager:
+    container_name: deployment-manager
+    hostname: deployment-manager
+    image: pnda/deployment-manager:1.0.0
+    environment:
+    - JUPYTER_HOST=jupyter
+    - DATA_LOGGER_URL=http://console-backend:3001 #data-logger uses the data-manager network stack
+    - PACKAGE_REPOSITORY_URL=http://package-repository:8888
+    - HADOOP_DISTRO=env
+    - HDFS_ROOT_URI=hdfs://hdfs-namenode
+    - SPARK_MASTER=spark://spark-master:7077
+    - YARN_NODE_MANAGERS=localhost
+    - ZOOKEEPER_QUORUM=zookeeper
+    - LOG_LEVEL=DEBUG
+    volumes:
+    - dm_keys:/opt/pnda/dm_keys
+  kafka-manager:
+    container_name: kafka-manager
+    hostname: kafka-manager
+    image: gradiant/kafka-manager:1.3.3.17
+    environment:
+    - ZK_HOSTS=zookeeper:2181
+    - KM_ARGS=-Dhttp.port=10900
+    ports:
+    - 10900:10900
+  package-repository:
+    container_name: package-repository
+    hostname: package-repository
+    image: pnda/package-repository:0.3.2
+    environment:
+    - FS_LOCATION_PATH=/mnt/packages
+    - DATA_LOGGER_URL=http://console-backend:3001 #data-logger uses the data-manager network stack
+    volumes:
+    - package-repository:/mnt/packages
+  hdfs-namenode:
+    container_name: hdfs-namenode
+    hostname: hdfs-namenode
+    image: gradiant/hdfs-namenode:2.7.7
+    environment:
+    - CLUSTER_NAME=hdfs-pnda
+    - CORE_CONF_hadoop_proxyuser_root_hosts=*
+    - CORE_CONF_hadoop_proxyuser_root_groups=*
+    - HDFS_CONF_dfs_permissions_superusergroup=root
+    - HDFS_CONF_dfs_replication=1
+    volumes:
+    - hdfs-name:/hadoop/dfs/name
+  hdfs-datanode:
+    container_name: hdfs-datanode
+    hostname: hdfs-datanode
+    image: gradiant/hdfs-datanode:2.7.7
+    environment:
+    - CORE_CONF_fs_defaultFS=hdfs://hdfs-namenode:8020
+    - CORE_CONF_hadoop_proxyuser_root_hosts=*
+    - CORE_CONF_hadoop_proxyuser_root_groups=*
+    - HDFS_CONF_dfs_permissions_superusergroup=root
+    - HDFS_CONF_dfs_replication=1
+    - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+    volumes:
+    - hdfs-data-0:/hadoop/dfs/data
+  hbase-master:
+    container_name: hbase-master
+    hostname: hbase-master
+    image: gradiant/hbase-master:2.0.1
+    environment:
+      HBASE_CONF_hbase_rootdir: hdfs://hdfs-namenode:8020/hbase
+      HBASE_CONF_hbase_cluster_distributed: "true"
+      HBASE_CONF_hbase_zookeeper_quorum: zookeeper
+      HBASE_CONF_hbase_master: hbase-master:60000
+      HBASE_CONF_hbase_master_hostname: hbase-master
+      HBASE_CONF_hbase_master_port: "60000"
+      HBASE_CONF_hbase_master_info_port: "60010"
+      HBASE_CONF_hbase_regionserver_port: "60020"
+      HBASE_CONF_hbase_regionserver_info_port: "60030"
+  hbase-region:
+    container_name: hbase-region
+    network_mode: "service:hdfs-datanode"
+    image: gradiant/hbase-region:2.0.1
+    environment:
+#      # For now this only works with 1 instance of hdfs-datanode
+      HBASE_CONF_hbase_regionserver_hostname: hdfs-datanode
+      HBASE_CONF_hbase_rootdir: hdfs://hdfs-namenode:8020/hbase
+      HBASE_CONF_hbase_cluster_distributed: "true"
+      HBASE_CONF_hbase_zookeeper_quorum: zookeeper
+      HBASE_CONF_hbase_master: hbase-master:60000
+      HBASE_CONF_hbase_master_hostname: hbase-master
+      HBASE_CONF_hbase_master_port: "60000"
+      HBASE_CONF_hbase_master_info_port: "60010"
+      HBASE_CONF_hbase_regionserver_port: "60020"
+      HBASE_CONF_hbase_regionserver_info_port: "60030"
+  opentsdb:
+    container_name: opentsdb
+    hostname: opentsdb
+    image: gradiant/opentsdb:2.3.1
+    environment:
+    - ZKQUORUM=zookeeper:2181
+    - ZKBASEDIR=/hbase
+    - TSDB_OPTS="--read-only"
+    - TSDB_PORT=4242
+    volumes:
+    - tsdb-bin:/usr/share/opentsdb/bin
+  kafka:
+    container_name: kafka
+    hostname: kafka
+    image: confluentinc/cp-kafka:4.0.0
+    environment:
+    - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    - KAFKA_INTER_BROKER_LISTENER_NAME=REPLICATION
+    - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=INGEST:PLAINTEXT,REPLICATION:PLAINTEXT,INTERNAL_PLAINTEXT:PLAINTEXT
+    - KAFKA_LISTENERS=INGEST://kafka:9094,REPLICATION://kafka:9093,INTERNAL_PLAINTEXT://kafka:9092
+    - KAFKA_ADVERTISED_LISTENERS=INGEST://kafka:9094,REPLICATION://kafka:9093,INTERNAL_PLAINTEXT://kafka:9092
+    - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    - JMX_PORT=9050
+    ports:
+    - 9092:9092
+    - 9050:9050
+    volumes:
+    - kafka-data:/var/lib/kafka/data
+  zookeeper:
+    container_name: zookeeper
+    hostname: zookeeper
+    image: zookeeper:3.4
+    volumes:
+    - zk-data:/data
+    - zk-datalog:/datalog
+  platform-testing:
+    container_name: platform-testing
+    hostname: platform-testing
+    image: pnda/testing:0.5.0
+    environment:
+    - CONSOLE_HOSTS=console-backend:3001
+    - ZOOKEEPERS=zookeeper:2181
+    - KAFKA_BROKERS=kafka:9050
+  jmxproxy:
+    container_name: jmxproxy
+    network_mode: service:platform-testing
+    image: gradiant/jmxproxy:3.2.0
+    depends_on:
+    - platform-testing
+  console-frontend:
+    container_name: console-frontend
+    hostname: console-frontend
+    image: pnda/console-frontend:1.0.0
+    environment:
+    - DATA_MANAGER_HOST=console-backend
+    - DATA_MANAGER_PORT=3123
+    - KAFKA_MANAGER_URL=http://kafka-manager:10900
+    - FLINK_URL=http://flink-master:8081
+    - OPENTSDB_URL=http://opentsdb:4242
+    ports:
+    - 80:80
+  console-backend:
+    container_name: console-backend
+    hostname: console-backend
+    image: pnda/console-backend-data-manager:1.0.0
+    environment:
+    - CONSOLE_FRONTEND_HOSTS_CSV=console-frontend
+    - DATASET_MANAGER_URL=http://data-service:7000
+    - DEPLOYMENT_MANAGER_URL=http://deployment-manager:5000
+  console-backend-data-logger:
+    container_name: console-backend-data-logger
+    network_mode: service:console-backend
+    image: pnda/console-backend-data-logger:1.0.0
+  redis:
+    container_name: redis
+    network_mode: service:console-backend
+    image: redis:3.2.11-alpine
+  data-service:
+    container_name: data-service
+    hostname: data-service
+    image: pnda/data-service:0.2.2
+    environment:
+    - LOCATION=/user/pnda/PNDA_datasets/datasets
+    - HADOOP_DISTRO=env
+    - HDFS_URL=hdfs-namenode:50070
+    - HBASE_HOST=hbase-master
+    - CM_HOST=ambari-server
+    - CM_USER=scm
+    - CM_PASSWORD=scm
+    depends_on:
+    - hdfs-namenode
+volumes:
+   jupyter-home:
+   dm_keys:
+   package-repository:
+   hdfs-name:
+   hdfs-data-0:
+   zk-data:
+   zk-datalog:
+   kafka-data:
+   grafana:
+   tsdb-bin:

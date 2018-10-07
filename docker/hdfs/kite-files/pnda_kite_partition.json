@@ -1,0 +1,7 @@
+[
+    {"type": "identity", "source": "src", "name": "source"},
+    {"type": "year",     "source": "timestamp"},
+    {"type": "month",    "source": "timestamp"},
+    {"type": "day",      "source": "timestamp"},
+    {"type": "hour",     "source": "timestamp"}
+]
