@@ -1,9 +1,13 @@
-version: '3'
+version: '3.4'
 services:
   gobblin:
     container_name: gobblin
     hostname: gobblin
     image: pnda/gobblin:0.11.0-0.1.0
+    build:
+      context: ./dockerfiles/platform-gobblin-modules
+      args:
+        version: 0.1.0
     environment:
     - HDFS_URL=hdfs://hdfs-namenode:8020
     - MASTER_DATASET_DIRECTORY=/user/pnda/PNDA_datasets/datasets
@@ -47,6 +51,10 @@ services:
     container_name: jupyter
     hostname: jupyter
     image: pnda/jupyter:4.4.0
+    build:
+      context: ./dockerfiles/jupyter
+      args:
+        version: 4.4.0
     volumes:
     - jupyter-home:/home
     environment:
@@ -76,6 +84,10 @@ services:
     container_name: deployment-manager
     hostname: deployment-manager
     image: pnda/deployment-manager:1.0.0
+    build:
+      context: ./dockerfiles/platform-deployment-manager
+      args:
+        version: 1.0.0
     environment:
     - JUPYTER_HOST=jupyter
     - DATA_LOGGER_URL=http://console-backend:3001 #data-logger uses the data-manager network stack
@@ -101,6 +113,10 @@ services:
     container_name: package-repository
     hostname: package-repository
     image: pnda/package-repository:0.3.2
+    build:
+      context: ./dockerfiles/platform-package-repository
+      args:
+        version: 0.3.2
     environment:
     - FS_LOCATION_PATH=/mnt/packages
     - DATA_LOGGER_URL=http://console-backend:3001 #data-logger uses the data-manager network stack
@@ -199,7 +215,11 @@ services:
   platform-testing:
     container_name: platform-testing
     hostname: platform-testing
-    image: pnda/testing:0.5.0
+    image: pnda/platform-testing:0.5.0
+    build:
+      context: ./dockerfiles/platform-testing
+      args:
+        version: 0.5.0
     environment:
     - CONSOLE_HOSTS=console-backend:3001
     - ZOOKEEPERS=zookeeper:2181
@@ -214,6 +234,10 @@ services:
     container_name: console-frontend
     hostname: console-frontend
     image: pnda/console-frontend:1.0.0
+    build:
+      context: ./dockerfiles/platform-console-frontend
+      args:
+        version: 1.0.0
     environment:
     - DATA_MANAGER_HOST=console-backend
     - DATA_MANAGER_PORT=3123
@@ -226,6 +250,11 @@ services:
     container_name: console-backend
     hostname: console-backend
     image: pnda/console-backend-data-manager:1.0.0
+    build:
+      context: ./dockerfiles/platform-console-backend
+      args:
+        version: 1.0.0
+      target: console-backend-data-manager
     environment:
     - CONSOLE_FRONTEND_HOSTS_CSV=console-frontend
     - DATASET_MANAGER_URL=http://data-service:7000
@@ -234,6 +263,11 @@ services:
     container_name: console-backend-data-logger
     network_mode: service:console-backend
     image: pnda/console-backend-data-logger:1.0.0
+    build:
+      context: ./dockerfiles/platform-console-backend
+      args:
+        version: 1.0.0
+      target: console-backend-data-logger
   redis:
     container_name: redis
     network_mode: service:console-backend
@@ -242,6 +276,11 @@ services:
     container_name: data-service
     hostname: data-service
     image: pnda/data-service:0.2.2
+    build:
+      context: ./dockerfiles/platform-data-mgmnt
+      args:
+        version: 0.2.2
+      target: data-service
     environment:
     - LOCATION=/user/pnda/PNDA_datasets/datasets
     - HADOOP_DISTRO=env
