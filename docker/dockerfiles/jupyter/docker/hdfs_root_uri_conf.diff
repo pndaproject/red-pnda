@@ -1,0 +1,16 @@
+diff --git a/platformlibs/data_handler.py b/platformlibs/data_handler.py
+index 27a2ea5..7bc1ae3 100644
+--- a/platformlibs/data_handler.py
++++ b/platformlibs/data_handler.py
+@@ -63,7 +63,10 @@ class DataHandler(object):
+         if self._hdfs_root_uri:
+             return self._hdfs_root_uri
+         cm_conf = read_config('/etc/platformlibs/platformlibs.ini')
+-        self._hdfs_root_uri = get_hdfs_uri(cm_conf['cm_host'], cm_conf['cm_user'], cm_conf['cm_pass'], cm_conf['hadoop_distro'])
++        if 'hdfs_root_uri' in cm_conf:
++            self._hdfs_root_uri = cm_conf['hdfs_root_uri']
++        else:
++            self._hdfs_root_uri = get_hdfs_uri(cm_conf['cm_host'], cm_conf['cm_user'], cm_conf['cm_pass'], cm_conf['hadoop_distro'])
+         return self._hdfs_root_uri
+ 
+     @property

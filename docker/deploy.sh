@@ -4,11 +4,11 @@ echo "----------------  STARTING HDFS and HBASE   ----------------"
 docker-compose up -d zookeeper
 docker-compose up -d hdfs-namenode
 docker-compose up -d hdfs-datanode
-docker-compose up -d hbase-master
 while ! docker exec -ti hdfs-namenode nc -vz hdfs-namenode:8020 ; do
   echo "waiting for hdfs-namenode to start"
   sleep 2
 done
+docker-compose up -d hbase-master
 docker-compose up -d hbase-region
 
 echo "----------------  ADDING users to HDFS  ----------------"
