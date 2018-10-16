@@ -1,0 +1,15 @@
+diff --git a/api/src/main/resources/deployer_utils.py b/api/src/main/resources/deployer_utils.py
+index 214a3dc..cca96fc 100644
+--- a/api/src/main/resources/deployer_utils.py
++++ b/api/src/main/resources/deployer_utils.py
+@@ -65,7 +65,9 @@ def update_hadoop_env(env):
+     #   3. push the temporary values into the main descriptor
+     tmp_env = dict(env)
+     logging.debug('Updating environment descriptor')
+-    if env['hadoop_distro'] == 'CDH':
++    if env['hadoop_distro'] == 'env':
++        logging.info('hadoop info already in environment descriptor')
++    elif env['hadoop_distro'] == 'CDH':
+         fill_hadoop_env_cdh(tmp_env)
+     else:
+         fill_hadoop_env_hdp(tmp_env)

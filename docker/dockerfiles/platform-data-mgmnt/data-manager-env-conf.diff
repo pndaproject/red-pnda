@@ -1,0 +1,42 @@
+diff --git a/data-service/src/main/resources/endpoint.py b/data-service/src/main/resources/endpoint.py
+index 0fda1de..ae945c9 100644
+--- a/data-service/src/main/resources/endpoint.py
++++ b/data-service/src/main/resources/endpoint.py
+@@ -14,11 +14,14 @@
+    Purpose: Discover API endpoints of a cluster.
+ """
+ import requests
++import os
+ 
+ from cm_api.api_client import ApiResource
+ 
+ CLOUDERA = "CDH"
+ HORTONWORKS = "HDP"
++ENVIRONMENT = "env"
++
+ 
+ class Endpoint(object):
+     """
+@@ -74,6 +77,8 @@ class Platform(object):
+             return Hortonworks()
+         elif distribution == "Local":
+             return Local()
++        elif distribution == "env":
++            return Environment()
+ 
+ 
+ def connect_cm(cm_host, cm_username, cm_password):
+@@ -174,3 +179,12 @@ class Local(Platform):
+         endpoints = {"HDFS": Endpoint("HDFS", "192.168.33.10:50070"),
+                      'HBASE': Endpoint("HBASE", "192.168.33.10")}
+         return endpoints
++
++class Environment(Platform):
++    """
++    Platform instance used  for testing purpose
++    """
++    def discover(self, properties):
++        endpoints = {"HDFS": Endpoint("HDFS", os.getenv("HDFS_URL")),
++                     'HBASE': Endpoint("HBASE", os.getenv("HBASE_HOST"))}
++        return endpoints
+\ No newline at end of file

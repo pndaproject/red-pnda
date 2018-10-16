@@ -1,0 +1,54 @@
+diff --git a/hdfs-cleaner/src/main/resources/endpoint.py b/hdfs-cleaner/src/main/resources/endpoint.py
+index 0efe71d..268c388 100644
+--- a/hdfs-cleaner/src/main/resources/endpoint.py
++++ b/hdfs-cleaner/src/main/resources/endpoint.py
+@@ -14,11 +14,13 @@
+    Purpose: Discover API endpoints of a cluster.
+ """
+ import requests
++import os
+ 
+ from cm_api.api_client import ApiResource
+ 
+ CLOUDERA = "CDH"
+ HORTONWORKS = "HDP"
++ENVIRONMENT = "env"
+ 
+ 
+ class Endpoint(object):
+@@ -75,6 +77,8 @@ class Platform(object):
+             return Hortonworks()
+         elif distribution == "Local":
+             return Local()
++        elif distribution == "env":
++            return Environment()
+ 
+ 
+ def connect_cm(cm_host, cm_username, cm_password):
+@@ -170,3 +174,12 @@ class Local(Platform):
+         endpoints = {"HDFS": Endpoint("HDFS", "192.168.33.10:50070"),
+                      'HBASE': Endpoint("HBASE", "192.168.33.10")}
+         return endpoints
++
++class Environment(Platform):
++    """
++    Platform instance used  for testing purpose
++    """
++    def discover(self, properties):
++        endpoints = {"HDFS": Endpoint("HDFS", os.getenv("HDFS_URL")),
++                     'HBASE': Endpoint("HBASE", os.getenv("HBASE_HOST"))}
++        return endpoints
+\ No newline at end of file
+diff --git a/hdfs-cleaner/src/main/resources/hdfs-cleaner.py b/hdfs-cleaner/src/main/resources/hdfs-cleaner.py
+index 0107983..ce54005 100644
+--- a/hdfs-cleaner/src/main/resources/hdfs-cleaner.py
++++ b/hdfs-cleaner/src/main/resources/hdfs-cleaner.py
+@@ -342,7 +342,7 @@ def main():
+                                                aws_access_key_id=properties['s3_archive_access_key'],
+                                                aws_secret_access_key=properties['s3_archive_secret_access_key'])
+             s3conn.create_bucket(properties['container_name'], location=properties['s3_archive_region'])
+-        else:
++        elif properties['swift_account'] != '':
+             container_type = 'swift'
+             swift_conn = swiftclient.client.Connection(auth_version='2',
+                                                        user=properties['swift_user'],

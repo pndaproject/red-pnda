@@ -1,0 +1,10 @@
+ports = [7000, 7001]
+bind_address = '0.0.0.0'
+sync_period = 5000
+datasets_table = "platform_datasets"
+data_repo = "{{ LOCATION | default('/user/pnda/PNDA_datasets/datasets') }}"
+hadoop_distro = "{{ HADOOP_DISTRO | default('env') }}"
+cm_host = "{{ CM_HOST | default('cm') }}"
+cm_user = "{{ CM_USER | default('scm') }}"
+cm_pass = "{{ CM_PASSWORD | default('scm') }}"
+log_file_prefix = "log"

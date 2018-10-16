@@ -1,0 +1,23 @@
+--- common_helpers.py.orig	2018-04-20 10:37:55.033647186 +0200
++++ common_helpers.py	2018-04-20 10:50:57.434402052 +0200
+@@ -14,6 +14,7 @@
+ Purpose:    Utility library that defines common helper functions
+ """
+ import requests
++import os
+ from cm_api.api_client import ApiResource
+ 
+ def flatten_dict(input_d, result=None):
+@@ -118,8 +119,10 @@
+         - hadoop_distro: 'CDH' or 'HDP'
+     '''
+     hdfs_uri = ''
+-
+-    if hadoop_distro == 'CDH':
++ 
++    if hadoop_distro == 'env':
++            hdfs_uri = os.getenv('HDFS_ROOT_URI')
++    elif hadoop_distro == 'CDH':
+         api = connect_cm(cm_host, cm_user, cm_pass)
+ 
+         for cluster_detail in api.get_all_clusters():
