@@ -1,0 +1,92 @@
+diff --git a/api/src/main/resources/opentsdb_descriptor.py b/api/src/main/resources/opentsdb_descriptor.py
+index c77f344..b4581c4 100644
+--- a/api/src/main/resources/opentsdb_descriptor.py
++++ b/api/src/main/resources/opentsdb_descriptor.py
+@@ -23,7 +23,7 @@ either express or implied.
+
+ import json
+ import logging
+-import deployer_utils
++import subprocess
+
+
+ def create(descriptor_path, environment):
+@@ -33,12 +33,9 @@ def create(descriptor_path, environment):
+
+     logging.debug('_deploy_opentsdb: %s', descriptor)
+
+-    cmds = []
++    zkquorum = environment['zookeeper_quorum']
++
+     for element in descriptor:
+         if 'name' in element:
+-            cmds.append('sudo /usr/share/opentsdb/bin/tsdb mkmetric %s' % element['name'])
+-
+-    key_file = environment['cluster_private_key']
+-    root_user = environment['cluster_root_user']
+-    target_host = environment['opentsdb'].split(':')[0]
+-    deployer_utils.exec_ssh(target_host, root_user, key_file, cmds)
++            subprocess.check_call(['/usr/share/opentsdb/bin/tsdb', 'mkmetric', element['name'],
++                                   '--zkquorum', zkquorum], shell=True)
+diff --git a/api/src/main/resources/test_application_creator.py b/api/src/main/resources/test_application_creator.py
+index b6f8425..629913a 100644
+--- a/api/src/main/resources/test_application_creator.py
++++ b/api/src/main/resources/test_application_creator.py
+@@ -46,7 +46,8 @@ class ApplicationCreatorTests(unittest.TestCase):
+         'hive_server': 'hivehost',
+         'hive_port': '124',
+         'queue_policy': 'echo dev',
+-        'opentsdb': '1.2.3.5:1234'
++        'opentsdb': '1.2.3.5:1234',
++        'zookeeper_quorum': 'zookeeper'
+     }
+     service = 'ns'
+     package_metadata = {
+@@ -201,8 +202,8 @@ class ApplicationCreatorTests(unittest.TestCase):
+             creator.create_application('abcd', self.package_metadata, 'aname', self.property_overrides)
+         print post_mock.call_args_list
+         # pylint: disable=line-too-long
+-        post_mock.assert_any_call('oozie/v1/jobs', data='<?xml version="1.0" encoding="UTF-8" ?><configuration><property><name>environment_cluster_private_key</name><value>keyfile.pem</value></property><property><name>environment_hbase_thrift_server</name><value>hbasehost</value></property><property><name>environment_webhdfs_host</name><value>webhdfshost</value></property><property><name>environment_opentsdb</name><value>1.2.3.5:1234</value></property><property><name>environment_yarn_node_managers</name><value>nm1,nm2</value></property><property><name>environment_webhdfs_port</name><value>webhdfsport</value></property><property><name>environment_hbase_rest_server</name><value>hbasehost</value></property><property><name>environment_oozie_uri</name><value>oozie</value></property><property><name>environment_hbase_rest_port</name><value>123</value></property><property><name>environment_cluster_root_user</name><value>root_user</value></property><property><name>environment_hive_port</name><value>124</value></property><property><name>environment_queue_policy</name><value>echo dev</value></property><property><name>environment_name_node</name><value>namenode</value></property><property><name>environment_hive_server</name><value>hivehost</value></property><property><name>component_property3</name><value>3</value></property><property><name>component_property4</name><value>nine</value></property><property><name>component_application</name><value>aname</value></property><property><name>component_name</name><value>componentA</value></property><property><name>component_job_name</name><value>aname-componentA-job</value></property><property><name>component_hdfs_root</name><value>/pnda/system/deployment-manager/applications/root/aname/componentA</value></property><property><name>application_user</name><value>root</value></property><property><name>deployment_start</name><value>2013-01-01T00:02Z</value></property><property><name>deployment_end</name><value>2013-01-08T00:02Z</value></property><property><name>user.name</name><value>root</value></property><property><name>oozie.use.system.libpath</name><value>true</value></property><property><name>oozie.libpath</name><value>/pnda/deployment/platform</value></property><property><name>mapreduce.job.queuename</name><value>dev</value></property><property><name>oozie.wf.application.path</name><value>namenode/pnda/system/deployment-manager/applications/root/aname/componentA</value></property></configuration>', headers={'Content-Type': 'application/xml'})
+-        post_mock.assert_any_call('oozie/v1/jobs', data='<?xml version="1.0" encoding="UTF-8" ?><configuration><property><name>environment_cluster_private_key</name><value>keyfile.pem</value></property><property><name>environment_hbase_thrift_server</name><value>hbasehost</value></property><property><name>environment_webhdfs_host</name><value>webhdfshost</value></property><property><name>environment_opentsdb</name><value>1.2.3.5:1234</value></property><property><name>environment_yarn_node_managers</name><value>nm1,nm2</value></property><property><name>environment_webhdfs_port</name><value>webhdfsport</value></property><property><name>environment_hbase_rest_server</name><value>hbasehost</value></property><property><name>environment_oozie_uri</name><value>oozie</value></property><property><name>environment_hbase_rest_port</name><value>123</value></property><property><name>environment_cluster_root_user</name><value>root_user</value></property><property><name>environment_hive_port</name><value>124</value></property><property><name>environment_queue_policy</name><value>echo dev</value></property><property><name>environment_name_node</name><value>namenode</value></property><property><name>environment_hive_server</name><value>hivehost</value></property><property><name>component_application</name><value>aname</value></property><property><name>component_name</name><value>componentB</value></property><property><name>component_job_name</name><value>aname-componentB-job</value></property><property><name>component_hdfs_root</name><value>/pnda/system/deployment-manager/applications/root/aname/componentB</value></property><property><name>application_user</name><value>root</value></property><property><name>deployment_start</name><value>2013-01-01T00:02Z</value></property><property><name>deployment_end</name><value>2013-01-08T00:02Z</value></property><property><name>user.name</name><value>root</value></property><property><name>oozie.use.system.libpath</name><value>true</value></property><property><name>oozie.libpath</name><value>/pnda/deployment/platform</value></property><property><name>mapreduce.job.queuename</name><value>dev</value></property><property><name>oozie.wf.application.path</name><value>namenode/pnda/system/deployment-manager/applications/root/aname/componentB</value></property></configuration>', headers={'Content-Type': 'application/xml'})
++        post_mock.assert_any_call('oozie/v1/jobs', data='<?xml version="1.0" encoding="UTF-8" ?><configuration><property><name>environment_cluster_private_key</name><value>keyfile.pem</value></property><property><name>environment_hbase_thrift_server</name><value>hbasehost</value></property><property><name>environment_webhdfs_host</name><value>webhdfshost</value></property><property><name>environment_opentsdb</name><value>1.2.3.5:1234</value></property><property><name>environment_yarn_node_managers</name><value>nm1,nm2</value></property><property><name>environment_webhdfs_port</name><value>webhdfsport</value></property><property><name>environment_hbase_rest_server</name><value>hbasehost</value></property><property><name>environment_oozie_uri</name><value>oozie</value></property><property><name>environment_hbase_rest_port</name><value>123</value></property><property><name>environment_cluster_root_user</name><value>root_user</value></property><property><name>environment_hive_port</name><value>124</value></property><property><name>environment_queue_policy</name><value>echo dev</value></property><property><name>environment_name_node</name><value>namenode</value></property><property><name>environment_zookeeper_quorum</name><value>zookeeper</value></property><property><name>environment_hive_server</name><value>hivehost</value></property><property><name>component_property3</name><value>3</value></property><property><name>component_property4</name><value>nine</value></property><property><name>component_application</name><value>aname</value></property><property><name>component_name</name><value>componentA</value></property><property><name>component_job_name</name><value>aname-componentA-job</value></property><property><name>component_hdfs_root</name><value>/pnda/system/deployment-manager/applications/root/aname/componentA</value></property><property><name>application_user</name><value>root</value></property><property><name>deployment_start</name><value>2013-01-01T00:02Z</value></property><property><name>deployment_end</name><value>2013-01-08T00:02Z</value></property><property><name>user.name</name><value>root</value></property><property><name>oozie.use.system.libpath</name><value>true</value></property><property><name>oozie.libpath</name><value>/pnda/deployment/platform</value></property><property><name>mapreduce.job.queuename</name><value>dev</value></property><property><name>oozie.wf.application.path</name><value>namenode/pnda/system/deployment-manager/applications/root/aname/componentA</value></property></configuration>', headers={'Content-Type': 'application/xml'})
++        post_mock.assert_any_call('oozie/v1/jobs', data='<?xml version="1.0" encoding="UTF-8" ?><configuration><property><name>environment_cluster_private_key</name><value>keyfile.pem</value></property><property><name>environment_hbase_thrift_server</name><value>hbasehost</value></property><property><name>environment_webhdfs_host</name><value>webhdfshost</value></property><property><name>environment_opentsdb</name><value>1.2.3.5:1234</value></property><property><name>environment_yarn_node_managers</name><value>nm1,nm2</value></property><property><name>environment_webhdfs_port</name><value>webhdfsport</value></property><property><name>environment_hbase_rest_server</name><value>hbasehost</value></property><property><name>environment_oozie_uri</name><value>oozie</value></property><property><name>environment_hbase_rest_port</name><value>123</value></property><property><name>environment_cluster_root_user</name><value>root_user</value></property><property><name>environment_hive_port</name><value>124</value></property><property><name>environment_queue_policy</name><value>echo dev</value></property><property><name>environment_name_node</name><value>namenode</value></property><property><name>environment_zookeeper_quorum</name><value>zookeeper</value></property><property><name>environment_hive_server</name><value>hivehost</value></property><property><name>component_application</name><value>aname</value></property><property><name>component_name</name><value>componentB</value></property><property><name>component_job_name</name><value>aname-componentB-job</value></property><property><name>component_hdfs_root</name><value>/pnda/system/deployment-manager/applications/root/aname/componentB</value></property><property><name>application_user</name><value>root</value></property><property><name>deployment_start</name><value>2013-01-01T00:02Z</value></property><property><name>deployment_end</name><value>2013-01-08T00:02Z</value></property><property><name>user.name</name><value>root</value></property><property><name>oozie.use.system.libpath</name><value>true</value></property><property><name>oozie.libpath</name><value>/pnda/deployment/platform</value></property><property><name>mapreduce.job.queuename</name><value>dev</value></property><property><name>oozie.wf.application.path</name><value>namenode/pnda/system/deployment-manager/applications/root/aname/componentB</value></property></configuration>', headers={'Content-Type': 'application/xml'})
+
+         put_mock.assert_any_call('oozie/v1/job/someid?action=suspend&user.name=root')
+
+diff --git a/api/src/main/resources/test_opentsdb_descriptor.py b/api/src/main/resources/test_opentsdb_descriptor.py
+index cefa39c..6870cb5 100644
+--- a/api/src/main/resources/test_opentsdb_descriptor.py
++++ b/api/src/main/resources/test_opentsdb_descriptor.py
+@@ -22,9 +22,9 @@ either express or implied.
+ """
+
+ import unittest
+-from mock import patch, mock_open
++from mock import patch, mock_open, call
+
+-import deployer_utils
++import subprocess
+ import opentsdb_descriptor
+
+
+@@ -33,13 +33,14 @@ class TestOpentsdbDescriptor(unittest.TestCase):
+         my_text = '[{"name":"my.metric"},{"name":"another.metic"}]'
+         mocked_open_function = mock_open(read_data=my_text)
+
+-        with patch.object(deployer_utils, 'exec_ssh', return_value=None) as exec_ssh,\
++        with patch.object(subprocess, 'check_call', return_value=None) as check_call,\
+                 patch("__builtin__.open", mocked_open_function):
+             environment = {
+-                'cluster_private_key': 'key name',
+-                'cluster_root_user': 'root user',
+-                'opentsdb': '1.2.3.4:9999,5.6.7.8:8888'}
++                'zookeeper_quorum': 'myzookeeper'}
+             opentsdb_descriptor.create("", environment)
+
+-        expected_cmds = ['sudo /usr/share/opentsdb/bin/tsdb mkmetric my.metric', 'sudo /usr/share/opentsdb/bin/tsdb mkmetric another.metic']
+-        exec_ssh.assert_called_once_with("1.2.3.4", "root user", "key name", expected_cmds)
++        expected_calls = [call(['/usr/share/opentsdb/bin/tsdb', 'mkmetric', 'my.metric',
++                                   '--zkquorum', 'myzookeeper'], shell=True),
++                          call(['/usr/share/opentsdb/bin/tsdb', 'mkmetric', 'another.metic',
++                                '--zkquorum', 'myzookeeper'], shell=True)]
++        check_call.assert_has_calls(expected_calls)
