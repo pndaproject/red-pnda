@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import json
-import requests
 import sys
+import requests
 
+# pylint: disable=line-too-long
 if len(sys.argv) != 5:
     print "Usage: {} user password uri datasource_json".format(sys.argv[0])
     print """{} pnda pnda http://localhost:3000 '{{ "name": "PNDA OpenTSDB", "type": "opentsdb", "url": "http://localhost:4243", "access": "proxy", "basicAuth": false, "isDefault": true }}'""".format(sys.argv[0])
@@ -11,24 +12,24 @@ if len(sys.argv) != 5:
 
 HEADERS = {'content-type': 'application/json'}
 
+# pylint: disable=invalid-name
 g_user = sys.argv[1]
 g_password = sys.argv[2]
 g_url = sys.argv[3]
-g_ds  = json.loads(sys.argv[4])
+g_ds = json.loads(sys.argv[4])
 
 session = requests.Session()
 login_post = session.post(
-   requests.compat.urljoin(g_url, 'login'),
-   data=json.dumps({
-      'user': g_user,
-      'email': '',
-      'password': g_password }),
-   headers=HEADERS)
+    requests.compat.urljoin(g_url, 'login'),
+    data=json.dumps({
+        'user': g_user,
+        'email': '',
+        'password': g_password}),
+    headers=HEADERS)
 
-create_ds = session.post(
-                requests.compat.urljoin(g_url, 'api/datasources'),
-                data=json.dumps(g_ds),
-                headers=HEADERS)
+create_ds = session.post(requests.compat.urljoin(g_url, 'api/datasources'),
+                         data=json.dumps(g_ds),
+                         headers=HEADERS)
 
 if create_ds.ok:
     print "Datasource '{}' created".format(g_ds['name'])
