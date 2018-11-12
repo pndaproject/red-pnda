@@ -29,5 +29,5 @@ python ./create_or_update_ds.py pnda pndapnda http://localhost:3000 '{ "name": "
 echo 'starting grafana..'
 sudo service grafana-server stop && sudo service grafana-server start
 
-# start grafana-serve ron boot
+# start grafana-server on boot
 sudo update-rc.d grafana-server defaults
