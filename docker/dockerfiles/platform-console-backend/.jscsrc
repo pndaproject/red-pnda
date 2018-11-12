@@ -1,0 +1,28 @@
+{
+    "preset": "./codestyle/PNDA.json",
+    "fileExtensions": [".js", "jscs"],
+
+    "disallowSpacesInsideObjectBrackets": null,
+    "disallowImplicitTypeConversion": ["string"],
+
+    "safeContextKeyword": "_this",
+
+    "jsDoc": {
+        "checkAnnotations": "closurecompiler",
+        "checkParamNames": true,
+        "requireParamTypes": true,
+        "checkRedundantParams": true,
+        "checkReturnTypes": true,
+        "checkRedundantReturns": true,
+        "requireReturnTypes": true,
+        "checkTypes": "capitalizedNativeCase",
+        "checkRedundantAccess": true,
+        "requireNewlineAfterDescription": true,
+        "requireCamelCaseOrUpperCaseIdentifiers": false
+    },
+
+    "excludeFiles": [
+        "test/data/**",
+        "patterns/*"
+    ]
+}
